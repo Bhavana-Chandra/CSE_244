@@ -1,5 +1,7 @@
 import { Card, CardContent } from "./ui/card";
-import { BookOpen, Brain, Globe, BarChart3, Users, Award, Zap, Shield } from "lucide-react";
+import { Button } from "./ui/button";
+import { BookOpen, Brain, Globe, BarChart3, Users, Award, Zap, Shield, Gamepad2 } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const features = [
   {
@@ -63,6 +65,33 @@ const FeaturesSection = () => {
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Experience the most comprehensive and engaging way to learn about the Indian Constitution
           </p>
+        </div>
+
+        {/* Games Hub Promo Card */}
+        <div className="mb-12">
+          <Card className="bg-gradient-to-r from-purple-600 to-indigo-600 text-white border-0 shadow-xl">
+            <CardContent className="p-8">
+              <div className="flex flex-col md:flex-row items-center justify-between">
+                <div className="flex items-center space-x-6 mb-6 md:mb-0">
+                  <div className="w-16 h-16 bg-white/20 rounded-full flex items-center justify-center">
+                    <Gamepad2 className="w-8 h-8" />
+                  </div>
+                  <div>
+                    <h3 className="text-2xl font-bold mb-2">🎮 Games Hub</h3>
+                    <p className="text-purple-100 max-w-md">
+                      Explore our collection of interactive constitutional games! From Memory Match to Treasure Hunt, 
+                      learn while having fun and earn rewards.
+                    </p>
+                  </div>
+                </div>
+                <Link to="/games">
+                  <Button size="lg" className="bg-white text-purple-600 hover:bg-purple-50 font-semibold">
+                    Explore Games →
+                  </Button>
+                </Link>
+              </div>
+            </CardContent>
+          </Card>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">

@@ -1,9 +1,8 @@
 import React from "react";
 import { useParams, Link } from "react-router-dom";
 import { scenarios, type Scenario, type DialogueLine, type Choice } from "./scenarioData";
-import Header from "../components/Header";
-import Footer from "../components/Footer";
 import { Button } from "../components/ui/button";
+import { ArrowLeft } from "lucide-react";
 import ManPortrait from "../assets/man.svg";
 import PolicePortrait from "../assets/police.svg";
 import PeoplePortrait from "../assets/people.svg";
@@ -93,29 +92,50 @@ const ScenarioDetail: React.FC = () => {
 
   if (!scenario) {
     return (
-      <div className="min-h-screen bg-background">
-        <Header />
-        <main className="container mx-auto px-4 py-10">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+        <div className="container mx-auto px-4 py-10">
           <div className="mb-6">
-            <Link to="/scenarios" className="text-sm text-primary">← Back to Scenarios</Link>
+            <Link to="/scenarios" className="text-sm text-primary flex items-center">
+              <ArrowLeft className="h-4 w-4 mr-2" />
+              Back to Scenarios
+            </Link>
           </div>
           <div className="text-destructive">Scenario not found.</div>
-        </main>
-        <Footer />
+        </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-background">
-      <Header />
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50">
+      {/* Header */}
+      <div className="bg-white shadow-sm border-b">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-4">
+              <Link to="/scenarios">
+                <Button variant="ghost" size="sm">
+                  <ArrowLeft className="h-4 w-4 mr-2" />
+                  Back to Scenarios
+                </Button>
+              </Link>
+              <div>
+                <h1 className="text-2xl font-bold text-gray-800">
+                  {scenario.title}
+                </h1>
+                <p className="text-sm text-gray-600">
+                  {scenario.theme}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <main className="relative min-h-[calc(100vh-6rem)]">
         <div className="absolute inset-0" style={{ backgroundImage: `url(${BgScene})`, backgroundSize: "cover", backgroundPosition: "center" }} />
         <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/70 to-black/50 backdrop-blur-[2px]" />
         <div className="relative container mx-auto px-4 py-6">
-          <div className="mb-6">
-            <Link to="/scenarios" className="text-sm text-white">← Back to Scenarios</Link>
-          </div>
           <div className="max-w-6xl mx-auto">
             <div className="mb-2 text-base text-white/80">{scenario.realCase}</div>
             <h1 className="text-4xl font-extrabold mb-1 text-white drop-shadow">{scenario.title}</h1>
@@ -161,11 +181,11 @@ const ScenarioDetail: React.FC = () => {
 
             {phase === "choices" && (
               <section className="mb-8">
-                <h2 className="text-xl font-semibold mb-2">Your Move</h2>
-                <p className="mb-4">{scenario.question}</p>
+                <h2 className="text-xl font-semibold mb-2 text-white">Your Move</h2>
+                <p className="mb-4 text-white/90">{scenario.question}</p>
                 <div className="space-y-3">
                   {scenario.choices.map((choice) => (
-                    <div key={choice.id} className={`border rounded-lg p-4 ${selectedChoice?.id === choice.id ? "border-primary" : "border-border"}`}>
+                    <div key={choice.id} className={`border rounded-lg p-4 bg-white/95 ${selectedChoice?.id === choice.id ? "border-primary ring-2 ring-primary/20" : "border-border"}`}>
                       <div className="flex items-center justify-between gap-4">
                         <div className="text-base">{choice.label}</div>
                         <div className="flex items-center gap-2">
@@ -193,14 +213,13 @@ const ScenarioDetail: React.FC = () => {
 
             {phase === "outcome" && selectedChoice && (
               <section className="mb-8">
-                <h2 className="text-xl font-semibold mb-2">Outcome</h2>
-                <div className="rounded-lg border p-4 bg-card">
+                <div className="rounded-lg border p-4 bg-white/95">
                   <div className="text-lg font-semibold mb-1">{selectedChoice.outcomeTitle}</div>
                   <p className="mb-3">{selectedChoice.outcomeDescription}</p>
                   {selectedChoice.isCorrect ? (
-                    <div className="text-sm text-emerald-600">This aligns with the Supreme Court's position in this case.</div>
+                    <div className="text-sm text-emerald-600 font-medium">✅ This aligns with the Supreme Court's position in this case.</div>
                   ) : (
-                    <div className="text-sm text-amber-600">Consider constitutional limits and public order principles.</div>
+                    <div className="text-sm text-amber-600 font-medium">⚠️ Consider constitutional limits and public order principles.</div>
                   )}
                 </div>
               </section>
@@ -208,15 +227,15 @@ const ScenarioDetail: React.FC = () => {
 
             {phase === "outcome" && (
               <section className="mb-8 grid md:grid-cols-2 gap-4">
-                <div className="rounded-lg border p-4 bg-card">
-                  <h3 className="font-semibold mb-2">Real Outcome (1962)</h3>
+                <div className="rounded-lg border p-4 bg-white/95">
+                  <h3 className="font-semibold mb-2">Real Outcome ({scenario.realCase.split(' ').pop()})</h3>
                   <ul className="list-disc pl-5 space-y-1">
                     {scenario.realOutcome.map((item, idx) => (
                       <li key={idx}>{item}</li>
                     ))}
                   </ul>
                 </div>
-                <div className="rounded-lg border p-4 bg-card">
+                <div className="rounded-lg border p-4 bg-white/95">
                   <h3 className="font-semibold mb-2">Alternative Path (With Knowledge)</h3>
                   <ul className="list-disc pl-5 space-y-1">
                     {scenario.alternativePath.map((item, idx) => (
@@ -228,13 +247,25 @@ const ScenarioDetail: React.FC = () => {
             )}
 
             <div className="flex items-center justify-between">
-              <Link to="/scenarios" className="text-sm text-primary">← Explore more scenarios</Link>
-              <Button onClick={() => { setSelectedChoice(null); setPhase("intro"); setDialogueIndex(-1); }} variant="outline">Restart</Button>
+              <Link to="/scenarios" className="text-sm text-white/80 flex items-center">
+                <ArrowLeft className="h-4 w-4 mr-2" />
+                Back to Scenarios
+              </Link>
+              <Button 
+                onClick={() => { 
+                  setSelectedChoice(null); 
+                  setPhase("intro"); 
+                  setDialogueIndex(-1);
+                }} 
+                variant="outline"
+                className="bg-white/10 text-white border-white/20 hover:bg-white/20"
+              >
+                Replay Scenario
+              </Button>
             </div>
           </div>
         </div>
       </main>
-      <Footer />
     </div>
   );
 };

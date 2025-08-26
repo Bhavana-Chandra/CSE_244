@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { Search, User, Globe, BookOpen, Brain, TrendingUp } from "lucide-react";
+import { Search, User, Globe, BookOpen, Brain, TrendingUp, Gamepad2 } from "lucide-react";
 import { Button } from "./ui/button";
 
 const Header = () => {
@@ -29,6 +29,10 @@ const Header = () => {
             <Link to="/scenarios" className="nav-link">
               Scenarios
             </Link>
+            <Link to="/games" className="nav-link flex items-center space-x-2 text-purple-600 font-semibold hover:text-purple-700">
+              <Gamepad2 className="h-4 w-4" />
+              <span>Games Hub</span>
+            </Link>
             <Link to="/ai-assistant" className="nav-link">
               AI Assistant
             </Link>
@@ -52,13 +56,13 @@ const Header = () => {
 
             {/* Search Button */}
             <Button variant="ghost" size="sm" className="hidden md:flex">
-              <Search className="w-4 h-4" />
+              <Search className="w-4 w-4" />
             </Button>
 
             {/* Login/Profile */}
             <Link to="/login">
               <Button variant="outline" size="sm">
-                <User className="w-4 h-4 mr-2" />
+                <User className="w-4 w-4 mr-2" />
                 Login
               </Button>
             </Link>
