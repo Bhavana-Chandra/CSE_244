@@ -1,0 +1,226 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Constitutional Platform Color System - Indian Flag Inspired */
+    --background: 248 250 252; /* #f8fafc - Light gray background */
+    --foreground: 30 41 59; /* #1e293b - Dark slate text */
+
+    --card: 0 0% 100%; /* Pure white for cards */
+    --card-foreground: 30 41 59;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 30 41 59;
+
+    /* Saffron Primary - Indian Flag */
+    --primary: 28 100% 60%; /* #FF9933 - Saffron */
+    --primary-foreground: 0 0% 100%; /* White text on saffron */
+
+    /* Navy Secondary */
+    --secondary: 224 71% 36%; /* #1e40af - Navy blue */
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    /* Green Success - Indian Flag */
+    --accent: 142 76% 36%; /* #138808 - Indian green */
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 226 29% 91%; /* #e2e8f0 - Light border */
+    --input: 226 29% 91%;
+    --ring: 28 100% 60%; /* Saffron ring */
+
+    /* Gold accent for achievements */
+    --gold: 45 93% 47%; /* #f59e0b - Golden yellow */
+    --gold-foreground: 0 0% 100%;
+
+    /* Ashoka Blue for official elements */
+    --ashoka-blue: 240 100% 25%; /* #000080 - Deep blue */
+    --ashoka-blue-foreground: 0 0% 100%;
+
+    /* Status colors */
+    --success: 142 71% 45%; /* #10b981 - Success green */
+    --warning: 45 93% 47%; /* #f59e0b - Warning amber */
+    --info: 217 91% 60%; /* #3b82f6 - Info blue */
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--accent)));
+    --gradient-secondary: linear-gradient(135deg, hsl(var(--secondary)), hsl(var(--ashoka-blue)));
+    --gradient-hero: linear-gradient(135deg, hsl(var(--primary) / 0.1), hsl(var(--accent) / 0.1));
+
+    /* Shadows */
+    --shadow-card: 0 1px 3px 0 hsl(var(--foreground) / 0.1), 0 1px 2px -1px hsl(var(--foreground) / 0.1);
+    --shadow-card-hover: 0 4px 6px -1px hsl(var(--foreground) / 0.1), 0 2px 4px -2px hsl(var(--foreground) / 0.1);
+    --shadow-header: 0 1px 3px 0 hsl(var(--foreground) / 0.1);
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 240 5.3% 26.1%;
+
+    --sidebar-primary: 240 5.9% 10%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 240 4.8% 95.9%;
+
+    --sidebar-accent-foreground: 240 5.9% 10%;
+
+    --sidebar-border: 220 13% 91%;
+
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 210 40% 98%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 212.7 26.8% 83.9%;
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-inter;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold tracking-tight;
+  }
+
+  h1 {
+    @apply text-5xl font-bold leading-tight;
+  }
+
+  h2 {
+    @apply text-4xl font-semibold leading-snug;
+  }
+
+  h3 {
+    @apply text-3xl font-semibold leading-normal;
+  }
+
+  h4 {
+    @apply text-2xl font-medium leading-normal;
+  }
+}
+
+@layer components {
+  /* Hero gradient background */
+  .hero-gradient {
+    background: var(--gradient-hero);
+  }
+
+  /* Card styles with constitutional theme */
+  .constitutional-card {
+    @apply bg-card rounded-xl border shadow-sm hover:shadow-md transition-shadow duration-300;
+    box-shadow: var(--shadow-card);
+  }
+
+  .constitutional-card:hover {
+    box-shadow: var(--shadow-card-hover);
+  }
+
+  /* Button variants for constitutional theme */
+  .btn-saffron {
+    @apply bg-primary text-primary-foreground hover:bg-primary/90 font-medium px-6 py-3 rounded-lg transition-all duration-200 hover:scale-105;
+  }
+
+  .btn-navy {
+    @apply bg-secondary text-secondary-foreground hover:bg-secondary/90 font-medium px-6 py-3 rounded-lg transition-all duration-200;
+  }
+
+  .btn-outline-saffron {
+    @apply border-2 border-primary text-primary hover:bg-primary hover:text-primary-foreground font-medium px-6 py-3 rounded-lg transition-all duration-200;
+  }
+
+  /* Navigation styles */
+  .nav-link {
+    @apply text-foreground hover:text-primary transition-colors duration-200 font-medium;
+    position: relative;
+  }
+
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: -4px;
+    left: 0;
+    background-color: hsl(var(--primary));
+    transition: width 0.3s ease;
+  }
+
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    width: 100%;
+  }
+
+  /* Constitutional pattern background */
+  .pattern-bg {
+    background-image: radial-gradient(circle at 1px 1px, hsl(var(--primary) / 0.15) 1px, transparent 0);
+    background-size: 20px 20px;
+  }
+
+  /* Article progress indicator */
+  .progress-bar {
+    @apply bg-muted rounded-full overflow-hidden;
+  }
+
+  .progress-fill {
+    @apply bg-primary h-full transition-all duration-300 ease-out;
+  }
+
+  /* Stats card with gradient */
+  .stats-card {
+    @apply constitutional-card;
+    background: var(--gradient-secondary);
+    color: white;
+  }
+}
