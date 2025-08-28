@@ -1,0 +1,23 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Card Frame -->
+  <rect x="8" y="8" width="48" height="48" rx="8" fill="#8B4513" stroke="#654321" stroke-width="2"/>
+  <rect x="10" y="10" width="44" height="44" rx="6" fill="#D2691E" stroke="#A0522D" stroke-width="1"/>
+  
+  <!-- Inner Frame -->
+  <rect x="12" y="12" width="40" height="40" rx="4" fill="#FFD700" stroke="#B8860B" stroke-width="1"/>
+  
+  <!-- Portrait Area -->
+  <rect x="16" y="16" width="32" height="32" rx="2" fill="#F5DEB3" stroke="#DEB887" stroke-width="1"/>
+  
+  <!-- Crown -->
+  <path d="M24 20 L28 16 L32 20 L36 16 L40 20 L38 24 L26 24 Z" fill="#FFD700" stroke="#B8860B" stroke-width="1"/>
+  
+  <!-- Decorative Corners -->
+  <circle cx="16" cy="16" r="2" fill="#FFD700"/>
+  <circle cx="48" cy="16" r="2" fill="#FFD700"/>
+  <circle cx="16" cy="48" r="2" fill="#FFD700"/>
+  <circle cx="48" cy="48" r="2" fill="#FFD700"/>
+  
+  <!-- Border Pattern -->
+  <rect x="14" y="14" width="36" height="36" rx="3" fill="none" stroke="#B8860B" stroke-width="1" stroke-dasharray="2,2"/>
+</svg>

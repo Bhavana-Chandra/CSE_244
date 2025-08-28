@@ -1,0 +1,32 @@
+{
+  "particles": {
+    "count": 150,
+    "colors": [
+      "#ff6b6b",
+      "#4ecdc4", 
+      "#45b7d1",
+      "#96ceb4",
+      "#feca57",
+      "#ff9ff3",
+      "#54a0ff",
+      "#5f27cd",
+      "#00d2d3",
+      "#ff9f43"
+    ],
+    "shapes": ["circle", "square", "triangle"],
+    "sizes": [2, 3, 4],
+    "velocities": {
+      "x": [-8, 8],
+      "y": [2, 5],
+      "rotation": [-10, 10]
+    },
+    "gravity": 0.1,
+    "friction": 0.98,
+    "lifetime": 5000
+  },
+  "animation": {
+    "duration": 3000,
+    "easing": "ease-out",
+    "delay": 0
+  }
+}
