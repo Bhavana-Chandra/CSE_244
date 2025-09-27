@@ -1,0 +1,92 @@
+[
+    {
+        "number": 1,
+        "title": "Fundamental Rights",
+        "explanation": "Fundamental Rights are the basic human rights guaranteed to all citizens of India. They ensure individual freedom and equality.",
+        "example": "The right to freedom of speech allows citizens to express their opinions without fear of censorship."
+    },
+    {
+        "number": 2,
+        "title": "Right to Equality",
+        "explanation": "The Right to Equality ensures that every individual is treated equally before the law and prohibits discrimination on grounds of religion, race, caste, sex, or place of birth.",
+        "example": "Every citizen has the right to access public places without discrimination."
+    },
+    {
+        "number": 3,
+        "title": "Right to Freedom",
+        "explanation": "The Right to Freedom includes various freedoms such as the freedom of speech, assembly, association, movement, residence, and profession.",
+        "example": "Citizens can gather peacefully to protest against government policies."
+    },
+    {
+        "number": 4,
+        "title": "Right against Exploitation",
+        "explanation": "This right prohibits human trafficking, forced labor, and child labor, ensuring protection against exploitation.",
+        "example": "Laws against child labor protect children from being forced to work in hazardous conditions."
+    },
+    {
+        "number": 5,
+        "title": "Right to Freedom of Religion",
+        "explanation": "This right guarantees freedom of conscience and the right to profess, practice, and propagate any religion.",
+        "example": "Individuals can choose to practice any religion or none at all."
+    },
+    {
+        "number": 6,
+        "title": "Cultural and Educational Rights",
+        "explanation": "These rights protect the interests of minorities by allowing them to preserve their culture and establish educational institutions.",
+        "example": "A linguistic minority can set up schools to promote their language and culture."
+    },
+    {
+        "number": 7,
+        "title": "Right to Constitutional Remedies",
+        "explanation": "This right allows individuals to approach the courts for enforcement of their fundamental rights.",
+        "example": "If a person's rights are violated, they can file a writ petition in the High Court."
+    },
+    {
+        "number": 8,
+        "title": "Directive Principles of State Policy",
+        "explanation": "These principles guide the state in policy-making and aim to create social and economic justice.",
+        "example": "The government aims to provide free and compulsory education to children."
+    },
+    {
+        "number": 9,
+        "title": "Fundamental Duties",
+        "explanation": "These duties are moral obligations for all citizens to promote harmony and uphold the Constitution.",
+        "example": "Citizens are expected to respect the national flag and the anthem."
+    },
+    {
+        "number": 10,
+        "title": "Amendment of the Constitution",
+        "explanation": "The Constitution can be amended to address changing needs and circumstances, ensuring its relevance.",
+        "example": "The 73rd Amendment introduced the Panchayati Raj system for local self-governance."
+    },
+    {
+        "number": 11,
+        "title": "Separation of Powers",
+        "explanation": "This principle divides the responsibilities of government into distinct branches to prevent abuse of power.",
+        "example": "The legislative, executive, and judiciary branches operate independently."
+    },
+    {
+        "number": 12,
+        "title": "Judicial Review",
+        "explanation": "Judicial review allows the judiciary to invalidate laws and actions that violate the Constitution.",
+        "example": "The Supreme Court can strike down a law that infringes on fundamental rights."
+    },
+    {
+        "number": 13,
+        "title": "Federal Structure",
+        "explanation": "India has a federal structure where power is divided between the central government and state governments.",
+        "example": "States have their own legislatures to make laws on subjects in the State List."
+    },
+    {
+        "number": 14,
+        "title": "Emergency Provisions",
+        "explanation": "The Constitution provides for emergency provisions that allow the government to take special measures during crises.",
+        "example": "During a national emergency, the central government can assume greater powers."
+    },
+    {
+        "number": 15,
+        "title": "Election Process",
+        "explanation": "The Constitution outlines the process for conducting free and fair elections in the country.",
+        "example": "The Election Commission of India oversees the conduct of elections at all levels."
+    }
+]

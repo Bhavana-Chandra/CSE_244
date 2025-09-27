@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { Card, CardContent } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { Badge } from '../components/ui/badge';
-import { ArrowLeft, Gamepad2, Brain, Map, Trophy, Star, Lock } from 'lucide-react';
+import { ArrowLeft, Gamepad2, Brain, Map, Trophy, Star, Lock, TreePine } from 'lucide-react';
 import CoinDisplay from '../components/CoinDisplay';
 
 interface GameCard {
@@ -30,15 +30,24 @@ const games: GameCard[] = [
     gradient: 'from-[hsl(var(--primary))] to-[hsl(var(--accent))]'
   },
   {
-    id: 'rights-quest',
-    title: 'Rights Quest',
-    description: 'Scenario journey about fundamental rights. (Currently disabled)',
+    id: 'spin-learn',
+    title: 'Samvidhan Spin & Learn',
+    description: 'Spin the wheel of Articles. Answer quick scenarios and win coins!',
     icon: <Map className="w-8 h-8" />,
-    route: '/rights-quest',
-    isEnabled: false,
-    isComingSoon: true,
+    route: '/spin-learn',
+    isEnabled: true,
     color: 'text-[hsl(var(--secondary))] ',
     gradient: 'from-[hsl(var(--secondary))] to-[hsl(var(--ashoka-blue))]'
+  },
+  {
+    id: 'growing-tree',
+    title: 'Growing Constitution Tree',
+    description: 'Grow a beautiful tree by unlocking 10 stages of constitution-making with quizzes.',
+    icon: <TreePine className="w-8 h-8" />,
+    route: '/growing-tree',
+    isEnabled: true,
+    color: 'text-[hsl(var(--primary))] ',
+    gradient: 'from-[hsl(var(--primary))] to-[hsl(var(--accent))]'
   },
   {
     id: 'treasure-hunt',
@@ -67,47 +76,17 @@ const GamesHub: React.FC = () => {
                 </Button>
               </Link>
               <div>
-                <h1 className="text-2xl font-bold">
-                  🎮 Games Hub
-                </h1>
-                <p className="text-sm text-muted-foreground">
-                  Choose your constitutional learning adventure
-                </p>
+                <h1 className="text-2xl font-bold">🎮 Games Hub</h1>
+                <p className="text-sm text-muted-foreground">Choose your constitutional learning adventure</p>
               </div>
             </div>
-            
-            <div className="flex items-center space-x-2">
-              <Badge className="bg-[hsl(var(--gold))]/15 text-[hsl(var(--gold))] border-[hsl(var(--gold))]/30">
-                <Star className="h-3 w-3 mr-1" />
-                Games Available
-              </Badge>
-            </div>
+            <div className="w-[320px]"><CoinDisplay /></div>
           </div>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 py-6">
-        <CoinDisplay />
-      </div>
-
-      <div className="container mx-auto px-4 mb-8">
-        <Card className="constitutional-card">
-          <CardContent className="p-8">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-[hsl(var(--primary))/0.15] rounded-full flex items-center justify-center mx-auto mb-4 text-[hsl(var(--primary))]">
-                <Gamepad2 className="w-8 h-8" />
-              </div>
-              <h2 className="text-3xl font-bold mb-4">Welcome to the Games Hub!</h2>
-              <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-                Learn through fun and interactive games. Complete challenges, earn coins, and unlock special rewards as you explore your rights and duties.
-              </p>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
-
       <div className="container mx-auto px-4 pb-12">
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mt-6">
           {games.map((game) => (
             <Card 
               key={game.id} 
@@ -117,70 +96,35 @@ const GamesHub: React.FC = () => {
                 <div className={`w-16 h-16 rounded-xl bg-gradient-to-br ${game.gradient} flex items-center justify-center text-white mb-4 mx-auto` }>
                   {game.icon}
                 </div>
-
                 <div className="text-center mb-6">
-                  <h3 className="text-xl font-bold mb-2">
-                    {game.title}
-                  </h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    {game.description}
-                  </p>
+                  <h3 className="text-xl font-bold mb-2">{game.title}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{game.description}</p>
                 </div>
-
                 <div className="flex justify-center mb-4">
-                  {game.isComingSoon ? (
-                    <Badge className="bg-muted text-foreground border">
-                      <Lock className="h-3 w-3 mr-1" />
-                      Coming Soon
-                    </Badge>
-                  ) : game.isEnabled ? (
+                  {game.isEnabled ? (
                     <Badge className="bg-[hsl(var(--accent))]/10 text-[hsl(var(--accent))] border-[hsl(var(--accent))/0.3]">
-                      <Star className="h-3 w-3 mr-1" />
-                      Available
+                      <Star className="h-3 w-3 mr-1" /> Available
                     </Badge>
                   ) : (
                     <Badge className="bg-muted text-foreground border">
-                      <Lock className="h-3 w-3 mr-1" />
-                      Disabled
+                      <Lock className="h-3 w-3 mr-1" /> Coming Soon
                     </Badge>
                   )}
                 </div>
-
                 <div className="text-center">
                   {game.isEnabled ? (
                     <Link to={game.route}>
                       <Button className="btn-saffron w-full">
-                        <Gamepad2 className="h-4 w-4 mr-2" />
-                        Play Now
+                        <Gamepad2 className="h-4 w-4 mr-2" /> Play Now
                       </Button>
                     </Link>
                   ) : (
-                    <Button 
-                      variant="outline" 
-                      className="w-full cursor-not-allowed opacity-50"
-                      disabled
-                    >
-                      <Lock className="h-4 w-4 mr-2" />
-                      {game.isComingSoon ? 'Coming Soon' : 'Disabled'}
-                    </Button>
+                    <Button variant="outline" className="w-full" disabled>Coming Soon</Button>
                   )}
                 </div>
               </CardContent>
             </Card>
           ))}
-        </div>
-
-        <div className="mt-12 text-center">
-          <Card className="constitutional-card">
-            <CardContent className="p-6">
-              <h3 className="text-lg font-semibold mb-2">
-                🎯 How to Play
-              </h3>
-              <p className="text-muted-foreground text-sm">
-                Select any available game to start your journey. Complete challenges to earn coins and unlock special rewards. Your coins and progress are shared across games.
-              </p>
-            </CardContent>
-          </Card>
         </div>
       </div>
     </div>

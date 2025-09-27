@@ -1,0 +1,60 @@
+export interface ArticleInfo {
+  id: string; // e.g., art14
+  number: string; // e.g., Article 14
+  title: string;
+  description: string;
+  example: string;
+}
+
+export const articles: ArticleInfo[] = [
+  { id: 'art12', number: 'Article 12', title: 'Definition of State', description: 'Defines “State” for Part III of the Constitution.', example: 'Government departments and agencies are considered the State.' },
+  { id: 'art13', number: 'Article 13', title: 'Laws Inconsistent with Fundamental Rights', description: 'Invalidates laws that violate fundamental rights.', example: 'A law violating equality can be struck down.' },
+  { id: 'art14', number: 'Article 14', title: 'Right to Equality', description: 'Equality before law and equal protection of laws.', example: 'No unfair discrimination by the State.' },
+  { id: 'art15', number: 'Article 15', title: 'Prohibition of Discrimination', description: 'Prohibits discrimination on religion, race, caste, sex or place of birth.', example: 'Public places must be open to all without discrimination.' },
+  { id: 'art16', number: 'Article 16', title: 'Equality of Opportunity in Public Employment', description: 'Ensures equality in government jobs.', example: 'Open, fair recruitment in public services.' },
+  { id: 'art17', number: 'Article 17', title: 'Abolition of Untouchability', description: 'Prohibits untouchability and its practice.', example: 'Denying entry based on caste is illegal.' },
+  { id: 'art18', number: 'Article 18', title: 'Abolition of Titles', description: 'Bans titles that create inequality, except military/academic.', example: 'No hereditary titles like “Raja” by the State.' },
+  { id: 'art19', number: 'Article 19', title: 'Right to Freedom', description: 'Freedoms: speech, assembly, association, movement, residence, profession.', example: 'Peaceful protests are protected, subject to restrictions.' },
+  { id: 'art20', number: 'Article 20', title: 'Protection in Respect of Conviction', description: 'No ex post facto law, double jeopardy, self-incrimination.', example: 'Cannot be punished under a law that did not exist at the time.' },
+  { id: 'art21', number: 'Article 21', title: 'Right to Life & Personal Liberty', description: 'No deprivation of life or liberty except procedure established by law.', example: 'Due process in evictions and arrests.' },
+  { id: 'art21A', number: 'Article 21A', title: 'Right to Education', description: 'Free and compulsory education for children 6–14 years.', example: 'Primary schooling at no cost.' },
+  { id: 'art22', number: 'Article 22', title: 'Protection Against Arrest/Detention', description: 'Rights on arrest and preventive detention safeguards.', example: 'Right to be informed of grounds of arrest.' },
+  { id: 'art23', number: 'Article 23', title: 'Prohibition of Human Trafficking & Forced Labour', description: 'Bans trafficking and begar.', example: 'Bonded labour is prohibited.' },
+  { id: 'art24', number: 'Article 24', title: 'Prohibition of Child Labour', description: 'No child employment in hazardous jobs.', example: 'Children cannot work in factories/mines.' },
+  { id: 'art36', number: 'Article 36', title: 'Definition of State (DPSP)', description: 'Defines “State” for Part IV (DPSP).', example: 'Guides the scope of DPSPs.' },
+  { id: 'art37', number: 'Article 37', title: 'Application of DPSPs', description: 'DPSPs are fundamental in governance but non-justiciable.', example: 'Courts cannot enforce DPSPs directly.' },
+  { id: 'art39', number: 'Article 39', title: 'Principles of Policy', description: 'Guides equal pay, livelihood, health and child development.', example: 'Equal pay for men and women.' },
+  { id: 'art40', number: 'Article 40', title: 'Village Panchayats', description: 'Organization of village panchayats.', example: 'Strengthening local self-government.' },
+  { id: 'art41', number: 'Article 41', title: 'Right to Work, Education & Assistance', description: 'State shall make provisions within its capacity.', example: 'Support during unemployment and old age.' },
+  { id: 'art42', number: 'Article 42', title: 'Just & Humane Work and Maternity Relief', description: 'Humane work conditions; maternity relief.', example: 'Maternity leave policies.' },
+  { id: 'art43', number: 'Article 43', title: 'Living Wage for Workers', description: 'Promotes living wage and decent standard of life.', example: 'Fair wage policies.' },
+  { id: 'art44', number: 'Article 44', title: 'Uniform Civil Code', description: 'State shall endeavour for UCC.', example: 'Common civil laws across religions.' },
+  { id: 'art45', number: 'Article 45', title: 'Early Childhood Care & Education', description: 'Provision for children below six years.', example: 'Anganwadi services for early education.' },
+  { id: 'art46', number: 'Article 46', title: 'Promotion of SCs/STs Interests', description: 'Educational and economic promotion of SCs/STs.', example: 'Scholarships and reservations.' },
+  { id: 'art47', number: 'Article 47', title: 'Public Health', description: 'Duty to improve public health and nutrition.', example: 'Clean drinking water initiatives.' },
+  { id: 'art51Aa', number: 'Article 51A(a)', title: 'Respect Constitution & Ideals', description: 'Abide by the Constitution and respect its ideals.', example: 'Standing respectfully during national anthem.' },
+  { id: 'art51Ab', number: 'Article 51A(b)', title: 'Cherish Freedom Struggle Ideals', description: 'Follow the noble ideals of the freedom movement.', example: 'Learning about freedom fighters.' },
+  { id: 'art51Ac', number: 'Article 51A(c)', title: 'Uphold Unity & Integrity', description: 'Protect the unity and integrity of India.', example: 'Discouraging divisive practices.' },
+  { id: 'art51Ad', number: 'Article 51A(d)', title: 'Defend the Country', description: 'Duty to defend India and render national service.', example: 'Responding to calls for national service.' },
+  { id: 'art51Ae', number: 'Article 51A(e)', title: 'Promote Harmony & Brotherhood', description: 'Promote harmony transcending diversities.', example: 'Inter-community cooperation.' },
+  { id: 'art51Af', number: 'Article 51A(f)', title: 'Preserve Culture', description: 'Value and preserve rich heritage.', example: 'Protect historical monuments.' },
+  { id: 'art51Ag', number: 'Article 51A(g)', title: 'Protect the Environment', description: 'Safeguard forests, lakes, rivers and wildlife.', example: 'Planting trees, avoiding pollution.' },
+  { id: 'art51Ah', number: 'Article 51A(h)', title: 'Develop Scientific Temper', description: 'Develop scientific temper and humanism.', example: 'Encourage evidence-based thinking.' },
+  { id: 'art51Ai', number: 'Article 51A(i)', title: 'Safeguard Public Property', description: 'Protect public property; abjure violence.', example: 'Not damaging buses or amenities.' },
+  { id: 'art51Aj', number: 'Article 51A(j)', title: 'Strive Towards Excellence', description: 'Strive for excellence in all spheres.', example: 'Pursue high standards in work and study.' },
+  { id: 'art52', number: 'Article 52', title: 'The President of India', description: 'Establishes the office of the President.', example: 'President is head of the Union.' },
+  { id: 'art53', number: 'Article 53', title: 'Executive Power of the Union', description: 'Vests executive power in the President.', example: 'Acts on aid and advice of Council of Ministers.' },
+  { id: 'art54', number: 'Article 54', title: 'Election of President', description: 'President elected by electoral college.', example: 'Elected by MPs and MLAs.' },
+  { id: 'art61', number: 'Article 61', title: 'Impeachment of President', description: 'Procedure for impeachment.', example: 'For violation of Constitution.' },
+  { id: 'art74', number: 'Article 74', title: 'Council of Ministers with PM', description: 'Council aids and advises the President.', example: 'Cabinet decision-making.' },
+  { id: 'art79', number: 'Article 79', title: 'Constitution of Parliament', description: 'Parliament consists of President, Lok Sabha, Rajya Sabha.', example: 'Bicameral legislature at Union level.' },
+  { id: 'art80', number: 'Article 80', title: 'Composition of Rajya Sabha', description: 'Details members of the Council of States.', example: 'Elected by State legislatures.' },
+  { id: 'art81', number: 'Article 81', title: 'Composition of Lok Sabha', description: 'Details members of the House of the People.', example: 'Directly elected representatives.' },
+  { id: 'art102', number: 'Article 102', title: 'Disqualifications for Membership', description: 'Grounds for disqualification of MPs.', example: 'Office of profit, unsound mind, etc.' },
+  { id: 'art105', number: 'Article 105', title: 'Powers & Privileges of Parliament', description: 'Freedom of speech and privileges of MPs.', example: 'Immunity for speeches in Parliament.' },
+  { id: 'art124', number: 'Article 124', title: 'Supreme Court of India', description: 'Establishment and constitution of the Supreme Court.', example: 'CJI and other judges appointment.' },
+  { id: 'art131', number: 'Article 131', title: 'Jurisdiction of Supreme Court', description: 'Original jurisdiction in Centre–State disputes.', example: 'Inter-state water dispute cases.' },
+  { id: 'art136', number: 'Article 136', title: 'Special Leave Petition', description: 'Allows SLP to Supreme Court.', example: 'Appeal by special leave in suitable cases.' },
+  { id: 'art141', number: 'Article 141', title: 'Law Declared by SC Binding', description: 'SC decisions binding on all courts.', example: 'High Courts follow SC precedent.' },
+  { id: 'art226', number: 'Article 226', title: 'High Court Writ Jurisdiction', description: 'High Courts can issue writs for rights enforcement.', example: 'Approach HC for habeas corpus.' }
+];

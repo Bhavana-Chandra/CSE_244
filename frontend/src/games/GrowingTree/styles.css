@@ -1,0 +1,9 @@
+/* Growing Constitution Tree overrides (keeps theme) */
+.growing-tree-parchment {
+  background: radial-gradient(ellipse at center, rgba(0,0,0,0.03) 0%, rgba(0,0,0,0.08) 100%);
+}
+
+.growing-tree-canvas {
+  max-width: 640px;
+  margin: 0 auto;
+}

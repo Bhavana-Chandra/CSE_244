@@ -12,6 +12,8 @@ import Scenarios from "./pages/Scenarios";
 import ScenarioDetail from "./pages/ScenarioDetail";
 import GamesHub from "./pages/GamesHub";
 import MemoryMatch from "./pages/MemoryMatch";
+import SpinLearn from "./pages/SpinLearn";
+import GrowingTreeGame from "./games/GrowingTree/index";
 import AiAssistant from "./pages/AiAssistant";
 import Progress from "./pages/Progress";
 import Login from "./pages/Login";
@@ -36,12 +38,13 @@ const App = () => (
             <Route path="/scenarios/:id" element={<ScenarioDetail />} />
             <Route path="/games" element={<GamesHub />} />
             <Route path="/memory-match" element={<MemoryMatch />} />
+            <Route path="/spin-learn" element={<SpinLearn />} />
+            <Route path="/growing-tree" element={<GrowingTreeGame />} />
             <Route path="/ai-assistant" element={<AiAssistant />} />
             <Route path="/progress" element={<Progress />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>

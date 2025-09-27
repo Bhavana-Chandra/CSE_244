@@ -1,0 +1,158 @@
+[
+  {
+    "id": "stage-1",
+    "title": "Constituent Assembly Elections",
+    "dates": "1946",
+    "summary": "Members of the Constituent Assembly were elected through provincial elections under the Cabinet Mission Plan.",
+    "fullText": "The Constituent Assembly of India was formed in 1946 after provincial elections. It represented diverse regions and communities, beginning the historic task of drafting the Constitution.",
+    "image": "/src/games/GrowingTree/assets/images/stage1-nehrulogo.png",
+    "questions": [
+      {
+        "q": "In which year was the Constituent Assembly elected?",
+        "options": ["1946", "1947", "1950"],
+        "answer": "1946"
+      }
+    ],
+    "resources": [
+      { "label": "Cabinet Mission Plan", "href": "https://en.wikipedia.org/wiki/Cabinet_Mission_to_India" }
+    ]
+  },
+  {
+    "id": "stage-2",
+    "title": "First Meeting of the Assembly",
+    "dates": "9 Dec 1946",
+    "summary": "The first meeting took place with Dr. Sachchidananda Sinha as interim President.",
+    "fullText": "On 9 December 1946 the Assembly met for the first time. Dr. Sachchidananda Sinha served as interim President until a permanent President was elected.",
+    "image": "/src/games/GrowingTree/assets/images/stage2-committee.jpg",
+    "questions": [
+      {
+        "q": "Who was interim President of the Constituent Assembly?",
+        "options": ["Dr. Sachchidananda Sinha", "Rajendra Prasad", "B.R. Ambedkar"],
+        "answer": "Dr. Sachchidananda Sinha"
+      }
+    ],
+    "resources": [
+      { "label": "First Session Notes", "href": "https://cadindia.clpr.org.in/" }
+    ]
+  },
+  {
+    "id": "stage-3",
+    "title": "Permanent President Elected",
+    "dates": "11 Dec 1946",
+    "summary": "Dr. Rajendra Prasad was elected the permanent President of the Assembly.",
+    "fullText": "On 11 December 1946, Dr. Rajendra Prasad was chosen as permanent President, presiding over subsequent sessions with dignity and consensus-building.",
+    "image": "/src/games/GrowingTree/assets/images/stage3-bnrau.jpg",
+    "questions": [
+      {
+        "q": "Who became the permanent President of the Assembly?",
+        "options": ["Dr. Rajendra Prasad", "Jawaharlal Nehru", "B.R. Ambedkar"],
+        "answer": "Dr. Rajendra Prasad"
+      }
+    ]
+  },
+  {
+    "id": "stage-4",
+    "title": "Objectives Resolution",
+    "dates": "13 Dec 1946",
+    "summary": "Jawaharlal Nehru moved the Objectives Resolution, guiding the Constitution's philosophy.",
+    "fullText": "Jawaharlal Nehru presented the Objectives Resolution outlining core values—sovereignty, democracy, justice, equality—which later influenced the Preamble.",
+    "image": "/src/games/GrowingTree/assets/images/stage4-draft.jpg",
+    "questions": [
+      {
+        "q": "Who moved the Objectives Resolution?",
+        "options": ["Jawaharlal Nehru", "Sardar Patel", "B.R. Ambedkar"],
+        "answer": "Jawaharlal Nehru"
+      }
+    ]
+  },
+  {
+    "id": "stage-5",
+    "title": "Drafting Committee Formed",
+    "dates": "29 Aug 1947",
+    "summary": "A Drafting Committee chaired by Dr. B.R. Ambedkar was formed to prepare the draft.",
+    "fullText": "On 29 August 1947, the Drafting Committee under Dr. B.R. Ambedkar began shaping the draft Constitution with meticulous legal and comparative study.",
+    "image": "/src/games/GrowingTree/assets/images/stage5-public-circulation.jpg",
+    "questions": [
+      {
+        "q": "Who chaired the Drafting Committee?",
+        "options": ["Dr. B.R. Ambedkar", "Rajendra Prasad", "C. Rajagopalachari"],
+        "answer": "Dr. B.R. Ambedkar"
+      }
+    ]
+  },
+  {
+    "id": "stage-6",
+    "title": "First Draft Submitted",
+    "dates": "November 1947",
+    "summary": "The first draft was presented, initiating debates and public feedback.",
+    "fullText": "The first draft released in November 1947 opened avenues for robust debates, expert inputs, and public reactions, refining constitutional design.",
+    "image": "/src/games/GrowingTree/assets/images/stage6-ambedkar.jpg",
+    "questions": [
+      {
+        "q": "What followed the first draft submission?",
+        "options": ["Debates and revisions", "Immediate adoption", "Judicial review"],
+        "answer": "Debates and revisions"
+      }
+    ]
+  },
+  {
+    "id": "stage-7",
+    "title": "Debates & Amendments",
+    "dates": "1948–49",
+    "summary": "Clause-by-clause debates and amendments built consensus.",
+    "fullText": "Through 1948–49, the Assembly deliberated on clauses, moved amendments, and balanced diverse views to reach a widely acceptable text.",
+    "image": "/src/games/GrowingTree/assets/images/stage7-first-reading.jpg",
+    "questions": [
+      {
+        "q": "What characterized the 1948–49 phase?",
+        "options": ["Debates & Amendments", "Elections to Lok Sabha", "Impeachment"],
+        "answer": "Debates & Amendments"
+      }
+    ]
+  },
+  {
+    "id": "stage-8",
+    "title": "Adoption of Constitution",
+    "dates": "26 Nov 1949",
+    "summary": "The Constitution was adopted; 26 Nov is Constitution Day.",
+    "fullText": "On 26 November 1949, the Assembly adopted the Constitution of India, marking a historic milestone and setting the date for partial enforcement.",
+    "image": "/src/games/GrowingTree/assets/images/stage8-second-reading.jpg",
+    "questions": [
+      {
+        "q": "When was the Constitution adopted?",
+        "options": ["26 Nov 1949", "26 Jan 1950", "15 Aug 1947"],
+        "answer": "26 Nov 1949"
+      }
+    ]
+  },
+  {
+    "id": "stage-9",
+    "title": "Signing the Constitution",
+    "dates": "24 Jan 1950",
+    "summary": "Members signed the Constitution in Hindi and English.",
+    "fullText": "On 24 January 1950, members signed the Constitution in Hindi and English, sealing India’s guiding charter before full enforcement.",
+    "image": "/src/games/GrowingTree/assets/images/stage9-third-reading.jpg",
+    "questions": [
+      {
+        "q": "In how many languages was it signed?",
+        "options": ["Two (Hindi & English)", "Only English", "Only Hindi"],
+        "answer": "Two (Hindi & English)"
+      }
+    ]
+  },
+  {
+    "id": "stage-10",
+    "title": "Constitution in Effect (Republic Day)",
+    "dates": "26 Jan 1950",
+    "summary": "The Constitution came into force; India became a Republic.",
+    "fullText": "On 26 January 1950, the Constitution fully came into effect. India became a Republic with the President as head of State.",
+    "image": "/src/games/GrowingTree/assets/images/stage10-parliament.jpg",
+    "questions": [
+      {
+        "q": "What happened on 26 January 1950?",
+        "options": ["Constitution came into effect", "First Assembly met", "Objectives Resolution moved"],
+        "answer": "Constitution came into effect"
+      }
+    ]
+  }
+]
