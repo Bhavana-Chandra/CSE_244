@@ -56,13 +56,13 @@ const Header = () => {
 
             {/* Search Button */}
             <Button variant="ghost" size="sm" className="hidden md:flex">
-              <Search className="w-4 w-4" />
+              <Search className="w-4 h-4" />
             </Button>
 
             {/* Login/Profile */}
             <Link to="/login">
               <Button variant="outline" size="sm">
-                <User className="w-4 w-4 mr-2" />
+                <User className="w-4 h-4 mr-2" />
                 Login
               </Button>
             </Link>
