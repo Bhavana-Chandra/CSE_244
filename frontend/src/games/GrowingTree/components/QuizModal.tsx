@@ -47,7 +47,7 @@ const QuizModal: React.FC<Props> = ({ open, stage, onClose, onCorrect, onIncorre
                 <p className="font-medium mb-2">{q.q}</p>
                 <div className="grid gap-2">
                   {q.options.map(opt => (
-                    <label key={opt} className={`border rounded p-2 cursor-pointer ${submitted && answers[idx]===opt ? 'border-[hsl(var(--primary))]' : 'border-border'}`}> 
+                    <label key={opt} className={`border rounded p-2 cursor-pointer ${submitted && answers[idx]===opt ? 'border-[hsl(var(--primary))]' : 'border-border/20'}`}> 
                       <input 
                         type="radio" 
                         name={`q-${idx}`} 

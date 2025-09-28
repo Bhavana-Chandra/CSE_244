@@ -12,7 +12,7 @@ import MemoryCard from '../components/MemoryCard';
 import RewardPopup from '../components/RewardPopup';
 
 const MemoryMatch: React.FC = () => {
-  const { addCoins, completeGame, isGameCompleted } = useGame();
+  const { addCoins, completeGame, isGameCompleted, updateGameScore, updateGameProgress } = useGame();
   const [cards, setCards] = useState<MemoryCardType[]>([]);
   const [flippedCards, setFlippedCards] = useState<string[]>([]);
   const [matchedPairs, setMatchedPairs] = useState<string[]>([]);
@@ -76,6 +76,19 @@ const MemoryMatch: React.FC = () => {
     setGameWon(true);
     addCoins(100, 'gold');
     completeGame('memory-match');
+    
+    try {
+      // Calculate score based on moves (fewer moves = higher score)
+      const maxMoves = cards.length; // Total possible moves
+      const score = Math.max(0, Math.floor((maxMoves - moves) * 10)); // Score decreases with more moves
+      const progress = Math.min(100, (matchedPairs.length / cards.length) * 100);
+      
+      // Update game score and progress
+      updateGameScore('memory-match', score, progress);
+    } catch (error) {
+      console.error('Error updating game score:', error);
+    }
+    
     setShowChestAnimation(true);
     setTimeout(() => {
       setShowWinScreen(true);

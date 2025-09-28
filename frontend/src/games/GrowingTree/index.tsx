@@ -21,7 +21,7 @@ export type Stage = typeof stagesData[number];
 const LOCAL_KEY = 'growing-tree-progress-v1';
 
 const GrowingTreeGame: React.FC = () => {
-  const { addCoins } = useGame();
+  const { addCoins, updateGameScore, updateGameProgress } = useGame();
   const [stages] = React.useState<Stage[]>(stagesData);
   const [currentIdx, setCurrentIdx] = React.useState<number>(0);
   const [unlocked, setUnlocked] = React.useState<number>(0);
@@ -64,6 +64,21 @@ const GrowingTreeGame: React.FC = () => {
     if (stageNum === 10 && !nextBadges.includes('gold')) nextBadges.push('gold');
     setBadges(nextBadges);
 
+    try {
+      // Calculate score and progress
+      const score = stageNum * 100; // 100 points per stage
+      const progress = Math.min(100, (nextUnlocked / 10) * 100);
+      
+      // Update game score and progress
+      updateGameScore('growing-tree', score, progress);
+      updateGameProgress('growing-tree', progress, { 
+        currentStage: stageNum, 
+        unlockedStages: nextUnlocked 
+      });
+    } catch (error) {
+      console.error('Error updating game score:', error);
+    }
+
     setRewardOpen(true);
     closeQuiz();
 
@@ -100,6 +115,13 @@ const GrowingTreeGame: React.FC = () => {
     setBadges([]);
     setRewardOpen(false);
     setFinalCelebration(false);
+    
+    // Reset game progress in context
+    updateGameProgress('growing-tree', 0, { 
+      currentStage: 1, 
+      unlockedStages: 1 
+    });
+    
     persist(0, 0, []);
   };
 

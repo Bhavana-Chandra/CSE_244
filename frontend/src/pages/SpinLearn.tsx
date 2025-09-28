@@ -20,7 +20,7 @@ interface QuizState {
 const shuffle = <T,>(arr: T[]) => arr.map(v => ({ v, r: Math.random() })).sort((a,b)=>a.r-b.r).map(({v})=>v);
 
 const SpinLearn: React.FC = () => {
-  const { addCoins, coins } = useGame(); // Make sure to get coins from context too
+  const { addCoins, updateGameScore, updateGameProgress, gameState } = useGame();
   const [roundArticles, setRoundArticles] = useState<ArticleInfo[]>([]);
   const [spinning, setSpinning] = useState(false);
   const [rotation, setRotation] = useState(0);
@@ -29,6 +29,9 @@ const SpinLearn: React.FC = () => {
   const [showQuiz, setShowQuiz] = useState(false);
   const [showFinalReward, setShowFinalReward] = useState(false);
   const [finalReward, setFinalReward] = useState<Reward | null>(null);
+  const [correctAnswers, setCorrectAnswers] = useState(0);
+  const [currentScore, setCurrentScore] = useState(0);
+  const [scoreAnimation, setScoreAnimation] = useState(false);
 
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
@@ -36,7 +39,11 @@ const SpinLearn: React.FC = () => {
     // initialize round with 15 random unique articles
     const pool = shuffle(allArticles).slice(0, 15);
     setRoundArticles(pool);
-  }, []);
+    
+    // Load current score from game state
+    const savedScore = gameState?.gameScores?.['spin-learn']?.score || 0;
+    setCurrentScore(savedScore);
+  }, [gameState]);
 
   const sliceAngle = roundArticles.length > 0 ? 360 / roundArticles.length : 0;
 
@@ -178,16 +185,39 @@ const SpinLearn: React.FC = () => {
     if (!quiz.current) return;
     const correct = title === quiz.correctTitle;
     setQuiz(prev => ({ ...prev, result: correct ? 'correct' : 'incorrect' }));
+    
     if (correct) {
       addCoins(50, 'gold'); // Add 50 coins for correct answer
+      setCorrectAnswers(prev => prev + 1);
+      
+      // Update score immediately
+      const newScore = currentScore + 100; // 100 points per correct answer
+      setCurrentScore(newScore);
+      
+      // Trigger score animation
+      setScoreAnimation(true);
+      setTimeout(() => setScoreAnimation(false), 1000);
+      
+      // Update game score in context
+      const progress = Math.min(100, ((correctAnswers + 1) / 15) * 100);
+      updateGameScore('spin-learn', newScore, progress);
     } else {
       addCoins(-25, 'gold'); // Subtract 25 coins for incorrect answer
+      // No score change for incorrect answers
     }
   };
 
   const nextAfterResult = () => {
     // if finished 15 spins, show final reward
     if (spinsDone >= 15) {
+      try {
+        // Final progress update (score already updated in answer function)
+        const progress = Math.min(100, (correctAnswers / 15) * 100);
+        updateGameProgress('spin-learn', progress);
+      } catch (error) {
+        console.error('Error updating game progress:', error);
+      }
+      
       const reward = getRandomReward();
       setFinalReward(reward);
       setShowFinalReward(true);
@@ -203,8 +233,10 @@ const SpinLearn: React.FC = () => {
     setRoundArticles(pool);
     setRotation(0);
     setSpinsDone(0);
+    setCorrectAnswers(0);
     setShowFinalReward(false);
     setFinalReward(null);
+    // Keep current score - don't reset it
   };
 
   return (
@@ -229,7 +261,28 @@ const SpinLearn: React.FC = () => {
       </div>
 
       <div className="container mx-auto px-4 py-6">
-        <CoinDisplay />
+        <div className="flex justify-between items-center max-w-3xl mx-auto">
+          <CoinDisplay />
+          
+          {/* Current Score Display */}
+          <Card className="constitutional-card">
+            <CardContent className="p-4">
+              <div className="flex items-center space-x-3">
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-[hsl(var(--accent))] to-[hsl(var(--primary))] flex items-center justify-center text-white">
+                  <Award className="w-5 h-5" />
+                </div>
+                <div>
+                  <div className="text-sm text-muted-foreground">Current Score</div>
+                  <div className={`text-2xl font-bold text-[hsl(var(--accent))] transition-all duration-500 ${
+                    scoreAnimation ? 'scale-110 animate-pulse' : ''
+                  }`}>
+                    {currentScore}
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       </div>
 
       <div className="container mx-auto px-4 pb-12">

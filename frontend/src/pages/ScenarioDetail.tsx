@@ -185,7 +185,7 @@ const ScenarioDetail: React.FC = () => {
                 <p className="mb-4 text-white/90">{scenario.question}</p>
                 <div className="space-y-3">
                   {scenario.choices.map((choice) => (
-                    <div key={choice.id} className={`border rounded-lg p-4 bg-white/95 ${selectedChoice?.id === choice.id ? "border-primary ring-2 ring-primary/20" : "border-border"}`}>
+                    <div key={choice.id} className={`border rounded-lg p-4 bg-white/95 ${selectedChoice?.id === choice.id ? "border-primary ring-2 ring-primary/20" : "border-border/20"}`}>
                       <div className="flex items-center justify-between gap-4">
                         <div className="text-base">{choice.label}</div>
                         <div className="flex items-center gap-2">
