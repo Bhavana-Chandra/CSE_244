@@ -319,7 +319,7 @@ i18n
   .init({
     resources,
     fallbackLng: 'en', // Default language
-    debug: false, // Set to true for development
+    debug: true, // Set to true for development
 
     interpolation: {
       escapeValue: false, // React already safes from XSS
