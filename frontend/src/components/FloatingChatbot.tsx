@@ -195,7 +195,10 @@ function FloatingChatbot() {
         }
       };
 
-      console.log(`Trying model: ${model.displayName} with question: ${question}`);
+      // Debug logging (only in development)
+      if (process.env.NODE_ENV === 'development') {
+        console.log(`Trying model: ${model.displayName} with question: ${question}`);
+      }
 
       const response = await axios.post(
         `${API_URL}${model.name}`,
@@ -209,7 +212,10 @@ function FloatingChatbot() {
         }
       );
       
-      console.log(`Model ${model.displayName} response:`, response.data);
+        // Debug logging (only in development)
+        if (process.env.NODE_ENV === 'development') {
+          console.log(`Model ${model.displayName} response:`, response.data);
+        }
       
       if (response.data) {
         let answer;
@@ -232,7 +238,10 @@ function FloatingChatbot() {
       }
       throw new Error("No response from model");
     } catch (err) {
-      console.log(`Model ${model.displayName} error:`, err.response?.status, err.message);
+        // Debug logging (only in development)
+        if (process.env.NODE_ENV === 'development') {
+          console.log(`Model ${model.displayName} error:`, err.response?.status, err.message);
+        }
       throw err;
     }
   }
@@ -261,7 +270,10 @@ function FloatingChatbot() {
           return;
         } catch (err) {
           lastError = err;
-          console.log(`Model ${model.displayName} failed:`, err.message);
+          // Debug logging (only in development)
+          if (process.env.NODE_ENV === 'development') {
+            console.log(`Model ${model.displayName} failed:`, err.message);
+          }
           continue; // Try next model
         }
       }
