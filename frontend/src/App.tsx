@@ -19,6 +19,7 @@ import Progress from "./pages/Progress";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Profile from "./pages/Profile";
+import QuickLinks from "./pages/QuickLinks";
 import NotFound from "./pages/NotFound";
 import FloatingChatbot from "./components/FloatingChatbot";
 
@@ -44,6 +45,7 @@ const App = () => (
             <Route path="/growing-tree" element={<GrowingTreeGame />} />
             <Route path="/ai-assistant" element={<AiAssistant />} />
             <Route path="/progress" element={<Progress />} />
+            <Route path="/quick-links" element={<QuickLinks />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path="/profile" element={<Profile />} />

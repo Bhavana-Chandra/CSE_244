@@ -1,4 +1,5 @@
-[
+// Export stages data as a TypeScript object
+const stagesData = [
   {
     "id": "stage-1",
     "title": "Constituent Assembly Elections",
@@ -155,4 +156,6 @@
       }
     ]
   }
-]
+];
+
+export default stagesData;
