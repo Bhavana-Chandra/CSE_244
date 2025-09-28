@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Search, Filter, Clock, Star, BookOpen, Scale, Users, Building, Gavel } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { Link } from "react-router-dom";
 
 const categories = [
   { id: "rights", name: "Fundamental Rights", count: 45, icon: Scale, color: "bg-primary" },
@@ -37,6 +38,94 @@ const articles = [
     category: "rights",
     isBookmarked: true,
     completed: true
+  },
+  {
+    id: 52,
+    number: "Articles 52-62",
+    title: "The President",
+    description: "These articles deal with the President as head of state, election process, qualifications, term of office, impeachment, and powers.",
+    difficulty: "Medium",
+    readTime: "15 min",
+    category: "government",
+    isBookmarked: false,
+    completed: false
+  },
+  {
+    id: 63,
+    number: "Articles 63-73",
+    title: "Vice-President and Council of Ministers",
+    description: "These cover the Vice-President's election, role as Rajya Sabha Chairman, and provisions for the Prime Minister and Council of Ministers.",
+    difficulty: "Medium",
+    readTime: "12 min",
+    category: "government",
+    isBookmarked: false,
+    completed: false
+  },
+  {
+    id: 74,
+    number: "Articles 74-78",
+    title: "Executive Powers and Responsibilities",
+    description: "These articles define the executive power of the Union, distribution of business, and collective responsibility of ministers.",
+    difficulty: "Hard",
+    readTime: "10 min",
+    category: "government",
+    isBookmarked: false,
+    completed: false
+  },
+  {
+    id: 124,
+    number: "Article 124",
+    title: "Establishment and Constitution of Supreme Court",
+    description: "This establishes the Supreme Court as the apex court with one Chief Justice and initially seven other judges (now 33).",
+    difficulty: "Medium",
+    readTime: "10 min",
+    category: "judiciary",
+    isBookmarked: false,
+    completed: false
+  },
+  {
+    id: 125,
+    number: "Article 125",
+    title: "Salaries and Conditions of Judges",
+    description: "This ensures independence of judiciary by providing that judges' salaries cannot be reduced during their term.",
+    difficulty: "Easy",
+    readTime: "8 min",
+    category: "judiciary",
+    isBookmarked: false,
+    completed: false
+  },
+  {
+    id: 126,
+    number: "Article 126",
+    title: "Acting Chief Justice",
+    description: "This provides for appointment of acting Chief Justice when the position is vacant to ensure continuity in judicial administration.",
+    difficulty: "Easy",
+    readTime: "5 min",
+    category: "judiciary",
+    isBookmarked: false,
+    completed: false
+  },
+  {
+    id: 1001,
+    number: "1st Amendment",
+    title: "Political and Administrative Reforms (1951)",
+    description: "Added Articles 31A and 31B, created Ninth Schedule to protect land reform laws from judicial review.",
+    difficulty: "Hard",
+    readTime: "15 min",
+    category: "amendments",
+    isBookmarked: false,
+    completed: false
+  },
+  {
+    id: 1007,
+    number: "7th Amendment",
+    title: "State Reorganization (1956)",
+    description: "Reorganized states and territories based on linguistic lines, a major restructuring of India's internal boundaries.",
+    difficulty: "Medium",
+    readTime: "12 min",
+    category: "amendments",
+    isBookmarked: false,
+    completed: false
   },
   {
     id: 3,
@@ -240,9 +329,11 @@ const Articles = () => {
                       </div>
                     </div>
                     
-                    <Button className="w-full btn-saffron">
-                      Start Reading →
-                    </Button>
+                    <Link to={`/articles/${article.id}`}>
+                      <Button className="w-full btn-saffron">
+                        Start Reading →
+                      </Button>
+                    </Link>
                   </CardContent>
                 </Card>
               ))}
