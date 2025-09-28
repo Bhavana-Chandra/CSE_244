@@ -1,11 +1,21 @@
 import { Link } from "react-router-dom";
-import { Search, User, BookOpen, Gamepad2 } from "lucide-react";
+import { Search, User, BookOpen, Gamepad2, LogOut } from "lucide-react";
 import { Button } from "./ui/button";
 import { useTranslation } from "react-i18next";
+import { useAuth } from "../context/AuthContext";
 import LanguageSelector from "./LanguageSelector";
 
 const Header = () => {
   const { t } = useTranslation();
+  const { user, logout } = useAuth();
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+    } catch (error) {
+      console.error('Logout failed:', error);
+    }
+  };
   
   return (
     <header className="bg-card border-b shadow-sm sticky top-0 z-50">
@@ -61,12 +71,31 @@ const Header = () => {
             </Button>
 
             {/* Login/Profile */}
-            <Link to="/login">
-              <Button variant="outline" size="sm">
-                <User className="w-4 h-4 mr-2" />
-                {t('navigation.login')}
-              </Button>
-            </Link>
+            {user ? (
+              <div className="flex items-center space-x-2">
+                <span className="text-sm text-muted-foreground hidden md:block">
+                  Hello, {user.full_name || user.email.split('@')[0]}
+                </span>
+                <Button variant="outline" size="sm" onClick={handleLogout}>
+                  <LogOut className="w-4 h-4 mr-2" />
+                  Logout
+                </Button>
+              </div>
+            ) : (
+              <div className="flex items-center space-x-2">
+                <Link to="/login">
+                  <Button variant="outline" size="sm">
+                    <User className="w-4 h-4 mr-2" />
+                    {t('navigation.login')}
+                  </Button>
+                </Link>
+                <Link to="/register">
+                  <Button variant="default" size="sm">
+                    Sign Up
+                  </Button>
+                </Link>
+              </div>
+            )}
           </div>
         </div>
       </div>
