@@ -1,145 +1,171 @@
-import React, { useState } from "react";
-import { Card, CardContent } from "@/components/ui/card";
+import React from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { 
-  Scale, 
+  ExternalLink, 
+  Globe, 
+  Shield, 
   Users, 
-  FileText, 
-  Building, 
-  BookOpen, 
-  Globe,
-  Info
+  Building,
+  FileText,
+  ArrowRight,
+  Scale
 } from "lucide-react";
-import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { useTranslation } from "react-i18next";
 
 const QuickLinks = () => {
   const { t } = useTranslation();
-  const [hoveredLink, setHoveredLink] = useState<string | null>(null);
 
-  const sections = [
+  // Government website links
+  const governmentLinks = [
     {
-      id: "citizenship",
-      title: "Citizenship & Rights",
+      id: "digital-india",
+      title: "Digital India Portal",
+      description: "Official portal for Digital India initiatives and services",
+      url: "https://digitalindia.gov.in",
+      icon: <Globe className="h-6 w-6" />,
       color: "bg-blue-500",
-      icon: <Scale className="h-6 w-6 text-white" />,
-      links: [
-        { id: "equality", title: "Right to Equality", summary: "Articles 14-18: Equal protection of laws and prohibition of discrimination" },
-        { id: "freedom", title: "Right to Freedom", summary: "Articles 19-22: Freedom of speech, expression, assembly, association, movement, etc." },
-        { id: "exploitation", title: "Right against Exploitation", summary: "Articles 23-24: Prohibition of trafficking, forced labor, and child labor" },
-        { id: "remedies", title: "Right to Constitutional Remedies", summary: "Article 32: Right to move the Supreme Court for enforcement of Fundamental Rights" },
-        { id: "education", title: "Right to Education", summary: "Article 21A: Free and compulsory education for children aged 6-14 years" }
-      ]
+      category: "Digital Services"
     },
     {
-      id: "women",
-      title: "Women & Child Rights",
-      color: "bg-pink-500",
-      icon: <Users className="h-6 w-6 text-white" />,
-      links: [
-        { id: "women", title: "Rights of Women", summary: "Constitutional provisions and laws protecting women's rights" },
-        { id: "child", title: "Child Rights & Protection", summary: "Laws and provisions for protection of children's rights and welfare" },
-        { id: "domestic", title: "Laws Against Domestic Violence", summary: "Protection of Women from Domestic Violence Act and related provisions" }
-      ]
-    },
-    {
-      id: "legal",
-      title: "Legal & Complaint Access",
+      id: "mygov",
+      title: "MyGov India",
+      description: "Citizen engagement platform for governance and policy participation",
+      url: "https://www.mygov.in",
+      icon: <Users className="h-6 w-6" />,
       color: "bg-green-500",
-      icon: <FileText className="h-6 w-6 text-white" />,
-      links: [
-        { id: "complaint", title: "How to File a Complaint", summary: "Step-by-step guide to filing complaints with various authorities" },
-        { id: "lokpal", title: "Lokpal & Anti-Corruption Links", summary: "Information about anti-corruption bodies and how to approach them" },
-        { id: "rti", title: "RTI (Right to Information)", summary: "How to file RTI applications and get information from public authorities" }
-      ]
+      category: "Citizen Engagement"
     },
     {
-      id: "governance",
-      title: "Governance & Democracy",
+      id: "india-gov",
+      title: "India.gov.in",
+      description: "National portal of India - Official government website",
+      url: "https://www.india.gov.in",
+      icon: <Shield className="h-6 w-6" />,
       color: "bg-orange-500",
-      icon: <Building className="h-6 w-6 text-white" />,
-      links: [
-        { id: "structure", title: "Structure of Government", summary: "Overview of the three branches of government: Executive, Legislature, and Judiciary" },
-        { id: "laws", title: "How Laws are Made", summary: "The legislative process and how bills become laws" },
-        { id: "powers", title: "State vs Central Powers", summary: "Distribution of powers between the Union and State governments" }
-      ]
+      category: "Government Portal"
     },
     {
-      id: "special",
-      title: "Special Topics",
+      id: "pm-india",
+      title: "PM India",
+      description: "Official website of the Prime Minister of India",
+      url: "https://www.pmindia.gov.in",
+      icon: <Building className="h-6 w-6" />,
       color: "bg-purple-500",
-      icon: <BookOpen className="h-6 w-6 text-white" />,
-      links: [
-        { id: "reservation", title: "Reservation & Social Justice", summary: "Constitutional provisions for reservation and affirmative action" },
-        { id: "emergency", title: "Emergency Provisions", summary: "Types of emergencies and their constitutional implications" },
-        { id: "amendments", title: "Amendments Overview", summary: "Process of amending the Constitution and key amendments" }
-      ]
+      category: "Leadership"
     },
     {
-      id: "multilingual",
-      title: "Multilingual Access",
+      id: "president-india",
+      title: "President of India",
+      description: "Official website of the President of India",
+      url: "https://presidentofindia.nic.in",
+      icon: <FileText className="h-6 w-6" />,
+      color: "bg-indigo-500",
+      category: "Constitutional Office"
+    },
+    {
+      id: "supreme-court",
+      title: "Supreme Court of India",
+      description: "Official website of the Supreme Court of India",
+      url: "https://main.sci.gov.in",
+      icon: <Scale className="h-6 w-6" />,
       color: "bg-red-500",
-      icon: <Globe className="h-6 w-6 text-white" />,
-      links: [
-        { id: "hindi", title: "हिंदी", summary: "View content in Hindi" },
-        { id: "tamil", title: "தமிழ்", summary: "View content in Tamil" },
-        { id: "bengali", title: "বাংলা", summary: "View content in Bengali" },
-        { id: "other", title: "Other Languages", summary: "Access content in additional Indian languages" }
-      ]
+      category: "Judiciary"
     }
   ];
+
+  const handleLinkClick = (url: string) => {
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
 
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
       
-      <main className="flex-grow bg-background py-12">
+      <main className="flex-grow hero-gradient py-12">
         <div className="container mx-auto px-4">
           {/* Page Header */}
           <div className="text-center mb-12">
-            <h1 className="text-3xl font-bold text-foreground mb-4">Quick Access: Know Your Rights & Duties</h1>
+            <h1 className="text-3xl font-bold text-foreground mb-4">
+              Government Quick Links
+            </h1>
             <p className="text-muted-foreground max-w-2xl mx-auto">
-              Explore key topics of the Indian Constitution in simple terms with direct links.
+              Access official government websites and digital services directly from here.
             </p>
           </div>
           
-          {/* Quick Links Grid */}
+          {/* Government Links Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {sections.map((section) => (
-              <Card key={section.id} className="overflow-hidden border-2 border-yellow-400 hover:shadow-lg transition-shadow">
-                <div className={`${section.color} p-4 flex items-center space-x-3`}>
-                  {section.icon}
-                  <h2 className="text-xl font-semibold text-white">{section.title}</h2>
-                </div>
-                <CardContent className="p-4">
-                  <ul className="space-y-2">
-                    {section.links.map((link) => (
-                      <TooltipProvider key={link.id}>
-                        <Tooltip>
-                          <TooltipTrigger asChild>
-                            <li className="p-2 hover:bg-yellow-50 rounded-md cursor-pointer transition-colors">
-                              <a 
-                                href={`/articles?category=${section.id}&topic=${link.id}`}
-                                className="flex items-center text-foreground hover:text-primary transition-colors"
-                                onMouseEnter={() => setHoveredLink(`${section.id}-${link.id}`)}
-                                onMouseLeave={() => setHoveredLink(null)}
-                              >
-                                <Info className="h-4 w-4 mr-2 text-yellow-500" />
-                                <span>{link.title}</span>
-                              </a>
-                            </li>
-                          </TooltipTrigger>
-                          <TooltipContent side="right" className="max-w-xs">
-                            <p>{link.summary}</p>
-                          </TooltipContent>
-                        </Tooltip>
-                      </TooltipProvider>
-                    ))}
-                  </ul>
+            {governmentLinks.map((link) => (
+              <Card 
+                key={link.id} 
+                className="constitutional-card hover:shadow-lg transition-all duration-300 cursor-pointer group"
+                onClick={() => handleLinkClick(link.url)}
+              >
+                <CardHeader className="pb-3">
+                  <div className="flex items-center space-x-3">
+                    <div className={`${link.color} p-3 rounded-lg text-white group-hover:scale-110 transition-transform duration-200`}>
+                      {link.icon}
+                    </div>
+                    <div className="flex-1">
+                      <CardTitle className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
+                        {link.title}
+                      </CardTitle>
+                      <p className="text-xs text-muted-foreground font-medium">
+                        {link.category}
+                      </p>
+                    </div>
+                  </div>
+                </CardHeader>
+                <CardContent className="pt-0">
+                  <p className="text-sm text-muted-foreground mb-4 leading-relaxed">
+                    {link.description}
+                  </p>
+                  <div className="flex items-center justify-between">
+                    <Button 
+                      variant="outline" 
+                      size="sm" 
+                      className="group-hover:bg-primary group-hover:text-primary-foreground transition-colors"
+                    >
+                      <ExternalLink className="h-4 w-4 mr-2" />
+                      Visit Website
+                    </Button>
+                    <ArrowRight className="h-4 w-4 text-muted-foreground group-hover:text-primary transition-colors" />
+                  </div>
                 </CardContent>
               </Card>
             ))}
+          </div>
+
+          {/* Additional Information */}
+          <div className="mt-12">
+            <Card className="constitutional-card">
+              <CardContent className="p-6">
+                <div className="text-center">
+                  <h3 className="text-xl font-semibold mb-3 text-foreground">
+                    About Government Links
+                  </h3>
+                  <p className="text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+                    These are official government websites that provide direct access to government services, 
+                    information, and digital platforms. All links open in new tabs to ensure you don't lose 
+                    your place on this constitutional learning platform.
+                  </p>
+                  <div className="mt-4 flex flex-wrap justify-center gap-2">
+                    <span className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm font-medium">
+                      Official Government Sites
+                    </span>
+                    <span className="px-3 py-1 bg-accent/10 text-accent rounded-full text-sm font-medium">
+                      Secure & Verified
+                    </span>
+                    <span className="px-3 py-1 bg-secondary/10 text-secondary rounded-full text-sm font-medium">
+                      Citizen Services
+                    </span>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </main>
