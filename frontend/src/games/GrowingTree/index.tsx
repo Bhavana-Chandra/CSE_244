@@ -11,7 +11,8 @@ import QuizModal from './components/QuizModal';
 import RewardPopup from './components/RewardPopup';
 import ProgressBar from './components/ProgressBar';
 import Scoreboard from './components/Scoreboard';
-import stagesData from './data/stages.json';
+// Import stages data from TypeScript file instead of JSON
+import stagesData from './data/stages';
 import '../../index.css';
 import './styles.css';
 import { useGame } from '../../context/GameContext';

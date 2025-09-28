@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import { BookOpen, Mail, Phone, MapPin } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
+  const { t } = useTranslation();
+  
   return (
     <footer className="bg-foreground text-background py-16">
       <div className="container mx-auto px-4">
@@ -12,39 +15,38 @@ const Footer = () => {
               <div className="w-8 h-8 bg-gradient-to-br from-primary via-gold to-accent rounded-lg flex items-center justify-center">
                 <BookOpen className="w-5 h-5 text-white" />
               </div>
-              <span className="text-lg font-bold">नागरिक और संविधान</span>
+              <span className="text-lg font-bold">{t('common.appName')}</span>
             </div>
             <p className="text-sm text-muted leading-relaxed">
-              Empowering citizens through constitutional education. 
-              Learn your rights, understand your duties, and participate actively in democracy.
+              {t('common.appDescription')}
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-semibold mb-4">Quick Links</h3>
+            <h3 className="font-semibold mb-4">{t('navigation.quickLinks')}</h3>
             <ul className="space-y-2 text-sm">
-              <li><Link to="/articles" className="hover:text-primary transition-colors">Constitutional Articles</Link></li>
-              <li><Link to="/scenarios" className="hover:text-primary transition-colors">Real-life Scenarios</Link></li>
-              <li><Link to="/ai-assistant" className="hover:text-primary transition-colors">AI Assistant</Link></li>
-              <li><Link to="/progress" className="hover:text-primary transition-colors">Your Progress</Link></li>
+              <li><Link to="/articles" className="hover:text-primary transition-colors">{t('navigation.articles')}</Link></li>
+              <li><Link to="/scenarios" className="hover:text-primary transition-colors">{t('navigation.scenarios')}</Link></li>
+              <li><Link to="/ai-assistant" className="hover:text-primary transition-colors">{t('navigation.aiAssistant')}</Link></li>
+              <li><Link to="/progress" className="hover:text-primary transition-colors">{t('navigation.progress')}</Link></li>
             </ul>
           </div>
 
           {/* Learning Categories */}
           <div>
-            <h3 className="font-semibold mb-4">Learning Topics</h3>
+            <h3 className="font-semibold mb-4">{t('navigation.learningTopics')}</h3>
             <ul className="space-y-2 text-sm">
-              <li><Link to="/articles?category=rights" className="hover:text-primary transition-colors">Fundamental Rights</Link></li>
-              <li><Link to="/articles?category=duties" className="hover:text-primary transition-colors">Fundamental Duties</Link></li>
-              <li><Link to="/articles?category=government" className="hover:text-primary transition-colors">Government Structure</Link></li>
-              <li><Link to="/articles?category=amendments" className="hover:text-primary transition-colors">Constitutional Amendments</Link></li>
+              <li><Link to="/articles?category=rights" className="hover:text-primary transition-colors">{t('navigation.fundamentalRights')}</Link></li>
+              <li><Link to="/articles?category=duties" className="hover:text-primary transition-colors">{t('navigation.fundamentalDuties')}</Link></li>
+              <li><Link to="/articles?category=government" className="hover:text-primary transition-colors">{t('navigation.governmentStructure')}</Link></li>
+              <li><Link to="/articles?category=amendments" className="hover:text-primary transition-colors">{t('navigation.constitutionalAmendments')}</Link></li>
             </ul>
           </div>
 
           {/* Contact Info */}
           <div>
-            <h3 className="font-semibold mb-4">Connect With Us</h3>
+            <h3 className="font-semibold mb-4">{t('navigation.connectWithUs')}</h3>
             <ul className="space-y-2 text-sm">
               <li className="flex items-center space-x-2">
                 <Mail className="w-4 h-4" />
@@ -65,11 +67,11 @@ const Footer = () => {
         <hr className="my-8 border-muted" />
 
         <div className="flex flex-col md:flex-row justify-between items-center text-sm text-muted">
-          <p>&copy; 2024 नागरिक और संविधान. All rights reserved.</p>
+          <p>&copy; 2024 {t('common.appName')}. {t('common.allRightsReserved')}</p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <Link to="/privacy" className="hover:text-primary transition-colors">Privacy Policy</Link>
-            <Link to="/terms" className="hover:text-primary transition-colors">Terms of Service</Link>
-            <Link to="/accessibility" className="hover:text-primary transition-colors">Accessibility</Link>
+            <Link to="/privacy" className="hover:text-primary transition-colors">{t('navigation.privacyPolicy')}</Link>
+            <Link to="/terms" className="hover:text-primary transition-colors">{t('navigation.termsOfService')}</Link>
+            <Link to="/accessibility" className="hover:text-primary transition-colors">{t('navigation.accessibility')}</Link>
           </div>
         </div>
       </div>

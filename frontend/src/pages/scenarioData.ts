@@ -1,7 +1,16 @@
+export type Character = {
+  name: string;
+  gender: "male" | "female" | "child";
+  age: "young" | "adult" | "elderly";
+  role: string;
+  emotion?: "neutral" | "angry" | "sad" | "happy" | "worried";
+};
+
 export type DialogueLine = {
   id: string;
-  speaker: "Kedar" | "Police" | "Narrator" | "Villager" | "Lawyer";
+  speaker: string;
   text: string;
+  character?: Character;
 };
 
 export type Choice = {
@@ -42,16 +51,39 @@ export const scenarios: Scenario[] = [
         {
           id: "d1",
           speaker: "Kedar",
-          text:
-            "These leaders are exploiting the poor. If things don't change, people will rise against them!",
+          text: "These leaders are exploiting the poor. If things don't change, people will rise against them!",
+          character: {
+            name: "Kedar Nath Singh",
+            gender: "male",
+            age: "adult",
+            role: "Citizen",
+            emotion: "angry"
+          }
         },
         {
           id: "d2",
-          speaker: "Police",
-          text:
-            "You are speaking against the government. That is sedition! You are under arrest.",
+          speaker: "Police Officer",
+          text: "You are speaking against the government. That is sedition! You are under arrest.",
+          character: {
+            name: "Police Officer",
+            gender: "male",
+            age: "adult",
+            role: "Law Enforcement",
+            emotion: "neutral"
+          }
         },
-        { id: "d3", speaker: "Villager", text: "(Villagers murmur nervously.)" },
+        { 
+          id: "d3", 
+          speaker: "Villager", 
+          text: "(Villagers murmur nervously.)",
+          character: {
+            name: "Village People",
+            gender: "female",
+            age: "adult",
+            role: "Community Members",
+            emotion: "worried"
+          }
+        },
       ],
     },
     question: "If you were Kedar's lawyer, what would you argue in court?",
@@ -106,13 +138,38 @@ export const scenarios: Scenario[] = [
           id: "d1",
           speaker: "Parent",
           text: "Please admit my child. We cannot afford private school fees.",
+          character: {
+            name: "Concerned Parent",
+            gender: "female",
+            age: "adult",
+            role: "Parent",
+            emotion: "worried"
+          }
         },
         {
           id: "d2",
           speaker: "School Official",
           text: "Sorry, we need proof of residence and income certificate. Come back when you have all documents.",
+          character: {
+            name: "School Administrator",
+            gender: "male",
+            age: "adult",
+            role: "School Official",
+            emotion: "neutral"
+          }
         },
-        { id: "d3", speaker: "Child", text: "(Child looks sad and confused.)" },
+        { 
+          id: "d3", 
+          speaker: "Child", 
+          text: "(Child looks sad and confused.)",
+          character: {
+            name: "Young Student",
+            gender: "child",
+            age: "young",
+            role: "Student",
+            emotion: "sad"
+          }
+        },
       ],
     },
     question: "What should the parent do to ensure their child's right to education?",
@@ -165,13 +222,38 @@ export const scenarios: Scenario[] = [
           id: "d1",
           speaker: "Official",
           text: "You must provide your fingerprints and iris scan for Aadhaar. It's mandatory.",
+          character: {
+            name: "Government Official",
+            gender: "male",
+            age: "adult",
+            role: "Government Official",
+            emotion: "neutral"
+          }
         },
         {
           id: "d2",
           speaker: "Citizen",
           text: "But what about my privacy? Can't I refuse?",
+          character: {
+            name: "Concerned Citizen",
+            gender: "female",
+            age: "adult",
+            role: "Citizen",
+            emotion: "worried"
+          }
         },
-        { id: "d3", speaker: "Official", text: "No exceptions. It's for your own good." },
+        { 
+          id: "d3", 
+          speaker: "Official", 
+          text: "No exceptions. It's for your own good.",
+          character: {
+            name: "Government Official",
+            gender: "male",
+            age: "adult",
+            role: "Government Official",
+            emotion: "neutral"
+          }
+        },
       ],
     },
     question: "What constitutional right protects citizens from forced biometric collection?",
@@ -224,13 +306,38 @@ export const scenarios: Scenario[] = [
           id: "d1",
           speaker: "Candidate",
           text: "I scored higher than the selected candidate. Why was I rejected?",
+          character: {
+            name: "Job Candidate",
+            gender: "male",
+            age: "young",
+            role: "Job Applicant",
+            emotion: "angry"
+          }
         },
         {
           id: "d2",
           speaker: "Official",
           text: "The selected candidate belongs to a reserved category. That's the policy.",
+          character: {
+            name: "Recruitment Official",
+            gender: "female",
+            age: "adult",
+            role: "Government Official",
+            emotion: "neutral"
+          }
         },
-        { id: "d3", speaker: "Candidate", text: "But I'm more qualified!" },
+        { 
+          id: "d3", 
+          speaker: "Candidate", 
+          text: "But I'm more qualified!",
+          character: {
+            name: "Job Candidate",
+            gender: "male",
+            age: "young",
+            role: "Job Applicant",
+            emotion: "angry"
+          }
+        },
       ],
     },
     question: "Does this reservation policy violate Article 14 (Right to Equality)?",
@@ -283,13 +390,38 @@ export const scenarios: Scenario[] = [
           id: "d1",
           speaker: "Farmer Leader",
           text: "We want to hold a peaceful march to express our concerns about the new laws.",
+          character: {
+            name: "Farmers' Union Leader",
+            gender: "male",
+            age: "elderly",
+            role: "Community Leader",
+            emotion: "neutral"
+          }
         },
         {
           id: "d2",
           speaker: "Police Officer",
           text: "Sorry, we cannot allow protests. It might cause traffic and law and order issues.",
+          character: {
+            name: "Police Inspector",
+            gender: "male",
+            age: "adult",
+            role: "Law Enforcement",
+            emotion: "neutral"
+          }
         },
-        { id: "d3", speaker: "Farmer", text: "But we have a constitutional right to protest!" },
+        { 
+          id: "d3", 
+          speaker: "Farmer", 
+          text: "But we have a constitutional right to protest!",
+          character: {
+            name: "Local Farmer",
+            gender: "female",
+            age: "adult",
+            role: "Farmer",
+            emotion: "angry"
+          }
+        },
       ],
     },
     question: "Can the police completely ban peaceful protests?",

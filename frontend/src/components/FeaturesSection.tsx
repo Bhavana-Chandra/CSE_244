@@ -2,68 +2,72 @@ import { Card, CardContent } from "./ui/card";
 import { Button } from "./ui/button";
 import { BookOpen, Brain, Globe, BarChart3, Users, Award, Zap, Shield, Gamepad2 } from "lucide-react";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
-const features = [
+const getFeatures = (t) => [
   {
     icon: BookOpen,
-    title: "Interactive Learning",
-    description: "Learn through real scenarios, examples, and simplified explanations of constitutional articles.",
+    title: t('features.interactiveLearning.title'),
+    description: t('features.interactiveLearning.description'),
     color: "text-primary"
   },
   {
     icon: Brain,
-    title: "AI Assistant",
-    description: "Get instant help with any constitutional query from our intelligent AI assistant.",
+    title: t('features.aiAssistant.title'),
+    description: t('features.aiAssistant.description'),
     color: "text-secondary"
   },
   {
     icon: Globe,
-    title: "Multilingual Support",
-    description: "Available in 12+ Indian languages to ensure everyone can learn in their preferred language.",
+    title: t('features.multilingualSupport.title'),
+    description: t('features.multilingualSupport.description'),
     color: "text-accent"
   },
   {
     icon: BarChart3,
-    title: "Progress Tracking",
-    description: "Monitor your learning journey with detailed analytics and personalized recommendations.",
+    title: t('features.progressTracking.title'),
+    description: t('features.progressTracking.description'),
     color: "text-gold"
   },
   {
     icon: Users,
-    title: "Community Learning",
-    description: "Join thousands of citizens learning together and share your constitutional knowledge.",
+    title: t('features.communityLearning.title'),
+    description: t('features.communityLearning.description'),
     color: "text-info"
   },
   {
     icon: Award,
-    title: "Gamified Experience",
-    description: "Earn achievements, complete challenges, and compete on leaderboards while learning.",
+    title: t('features.gamifiedExperience.title'),
+    description: t('features.gamifiedExperience.description'),
     color: "text-warning"
   },
   {
     icon: Zap,
-    title: "Quick References",
-    description: "Access key constitutional concepts, rights, and duties with instant search and filters.",
+    title: t('features.quickReferences.title'),
+    description: t('features.quickReferences.description'),
     color: "text-primary"
   },
   {
     icon: Shield,
-    title: "Authentic Content",
-    description: "All content is verified by constitutional experts and updated with latest amendments.",
+    title: t('features.authenticContent.title'),
+    description: t('features.authenticContent.description'),
     color: "text-accent"
   }
 ];
 
 const FeaturesSection = () => {
+  const { t } = useTranslation();
+  const features = getFeatures(t);
+  
   return (
     <section className="py-20 bg-muted/30">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-foreground mb-4">
-            Why Choose Our Platform?
+            {t('features.sectionTitle')}
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Experience the most comprehensive and engaging way to learn about the Indian Constitution
+            {t('features.sectionDescription')}
           </p>
         </div>
 
@@ -77,16 +81,15 @@ const FeaturesSection = () => {
                     <Gamepad2 className="w-8 h-8" />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold mb-2">🎮 Games Hub</h3>
+                    <h3 className="text-2xl font-bold mb-2">{t('features.gamesHub.title')}</h3>
                     <p className="text-purple-100 max-w-md">
-                      Explore our collection of interactive constitutional games! From Memory Match to Treasure Hunt, 
-                      learn while having fun and earn rewards.
+                      {t('features.gamesHub.description')}
                     </p>
                   </div>
                 </div>
                 <Link to="/games">
                   <Button size="lg" className="bg-white text-purple-600 hover:bg-purple-50 font-semibold">
-                    Explore Games →
+                    {t('features.gamesHub.exploreButton')}
                   </Button>
                 </Link>
               </div>

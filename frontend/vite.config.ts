@@ -20,4 +20,6 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  // Ensure JSON files are properly imported
+  assetsInclude: ['**/*.json'],
 }));
