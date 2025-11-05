@@ -15,14 +15,12 @@ import GamesHub from "./pages/GamesHub";
 import MemoryMatch from "./pages/MemoryMatch";
 import SpinLearn from "./pages/SpinLearn";
 import GrowingTreeGame from "./games/GrowingTree/index";
-import AiAssistant from "./pages/AiAssistant";
 import Progress from "./pages/Progress";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 import QuickLinks from "./pages/QuickLinks";
 import NotFound from "./pages/NotFound";
-import FloatingChatbot from "./components/FloatingChatbot";
 
 const queryClient = new QueryClient();
 
@@ -33,7 +31,6 @@ const App = () => (
         <TooltipProvider>
           <Toaster />
           <Sonner />
-          <FloatingChatbot />
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Index />} />
@@ -45,7 +42,6 @@ const App = () => (
               <Route path="/memory-match" element={<MemoryMatch />} />
               <Route path="/spin-learn" element={<SpinLearn />} />
               <Route path="/growing-tree" element={<GrowingTreeGame />} />
-              <Route path="/ai-assistant" element={<AiAssistant />} />
               <Route path="/progress" element={<Progress />} />
               <Route path="/quick-links" element={<QuickLinks />} />
               <Route path="/login" element={<Login />} />

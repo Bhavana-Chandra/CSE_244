@@ -50,9 +50,7 @@ const Header = () => {
               <Gamepad2 className="h-4 w-4" />
               <span>{t('navigation.gamesHub')}</span>
             </Link>
-            <Link to="/ai-assistant" className="nav-link">
-              {t('navigation.aiAssistant')}
-            </Link>
+
             <Link to="/progress" className="nav-link">
               {t('navigation.progress')}
             </Link>

@@ -19,7 +19,6 @@ const resources = {
         articles: "Articles",
         scenarios: "Scenarios",
         gamesHub: "Games Hub",
-        aiAssistant: "AI Assistant",
         progress: "Progress",
         login: "Login",
         quickLinks: "Quick Links",
@@ -70,10 +69,6 @@ const resources = {
           title: "Interactive Learning",
           description: "Learn through real-world scenarios, examples, and simplified explanations of constitutional articles."
         },
-        aiAssistant: {
-          title: "AI Assistant",
-          description: "Get instant help for any constitutional question from our intelligent AI assistant."
-        },
         multilingualSupport: {
           title: "Multilingual Support",
           description: "Available in 12+ Indian languages, ensuring everyone can learn in their preferred language."
@@ -121,7 +116,6 @@ const resources = {
         articles: "लेख",
         scenarios: "परिदृश्य",
         gamesHub: "गेम्स हब",
-        aiAssistant: "एआई सहायक",
         progress: "प्रगति",
         login: "लॉगिन",
         quickLinks: "त्वरित लिंक",
@@ -172,10 +166,6 @@ const resources = {
           title: "इंटरैक्टिव लर्निंग",
           description: "वास्तविक परिदृश्यों, उदाहरणों और संवैधानिक अनुच्छेदों के सरलीकृत स्पष्टीकरण के माध्यम से सीखें।"
         },
-        aiAssistant: {
-          title: "एआई सहायक",
-          description: "हमारे बुद्धिमान एआई सहायक से किसी भी संवैधानिक प्रश्न के लिए तत्काल सहायता प्राप्त करें।"
-        },
         multilingualSupport: {
           title: "बहुभाषी समर्थन",
           description: "12+ भारतीय भाषाओं में उपलब्ध, यह सुनिश्चित करने के लिए कि हर कोई अपनी पसंदीदा भाषा में सीख सके।"
@@ -223,7 +213,6 @@ const resources = {
         articles: "ಲೇಖನಗಳು",
         scenarios: "ಸನ್ನಿವೇಶಗಳು",
         gamesHub: "ಆಟಗಳ ಕೇಂದ್ರ",
-        aiAssistant: "ಎಐ ಸಹಾಯಕ",
         progress: "ಪ್ರಗತಿ",
         login: "ಲಾಗಿನ್",
         quickLinks: "ತ್ವರಿತ ಲಿಂಕ್‌ಗಳು",
@@ -273,10 +262,6 @@ const resources = {
         interactiveLearning: {
           title: "ಸಂವಾದಾತ್ಮಕ ಕಲಿಕೆ",
           description: "ವಾಸ್ತವಿಕ ಸನ್ನಿವೇಶಗಳು, ಉದಾಹರಣೆಗಳು ಮತ್ತು ಸಂವಿಧಾನಾತ್ಮಕ ವಿಧಿಗಳ ಸರಳೀಕೃತ ವಿವರಣೆಗಳ ಮೂಲಕ ಕಲಿಯಿರಿ."
-        },
-        aiAssistant: {
-          title: "ಎಐ ಸಹಾಯಕ",
-          description: "ನಮ್ಮ ಬುದ್ಧಿವಂತ ಎಐ ಸಹಾಯಕದಿಂದ ಯಾವುದೇ ಸಂವಿಧಾನಾತ್ಮಕ ಪ್ರಶ್ನೆಗಳಿಗೆ ತಕ್ಷಣದ ಸಹಾಯವನ್ನು ಪಡೆಯಿರಿ."
         },
         multilingualSupport: {
           title: "ಬಹುಭಾಷಾ ಬೆಂಬಲ",
