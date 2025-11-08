@@ -4,7 +4,7 @@ import { Card, CardContent } from '../components/ui/card';
 import { Button } from '../components/ui/button';
 import { Badge } from '../components/ui/badge';
 import { Progress } from '../components/ui/progress';
-import { ArrowLeft, Gamepad2, Brain, Map, Trophy, Star, Lock, TreePine, Target, TrendingUp } from 'lucide-react';
+import { ArrowLeft, Gamepad2, Brain, Map, Trophy, Star, Lock, TreePine, Target, TrendingUp, Scale, Grid3x3 } from 'lucide-react';
 import CoinDisplay from '../components/CoinDisplay';
 import { useGame } from '../context/GameContext';
 
@@ -18,7 +18,7 @@ interface GameCard {
   isComingSoon?: boolean;
   color: string;
   gradient: string;
-  gameId: 'memory-match' | 'spin-learn' | 'growing-tree';
+  gameId: 'memory-match' | 'spin-learn' | 'growing-tree' | 'rights-duties' | 'crossword';
 }
 
 const games: GameCard[] = [
@@ -54,6 +54,28 @@ const games: GameCard[] = [
     color: 'text-[hsl(var(--primary))] ',
     gradient: 'from-[hsl(var(--primary))] to-[hsl(var(--accent))]',
     gameId: 'growing-tree'
+  },
+  {
+    id: 'rights-duties',
+    title: 'Rights vs. Duties Challenge',
+    description: 'Match constitutional rights with their corresponding duties. Learn the balance between freedoms and responsibilities!',
+    icon: <Scale className="w-8 h-8" />,
+    route: '/rights-duties',
+    isEnabled: true,
+    color: 'text-[hsl(var(--accent))] ',
+    gradient: 'from-amber-400 to-orange-500',
+    gameId: 'rights-duties'
+  },
+  {
+    id: 'crossword',
+    title: 'Constitution Crossword Challenge',
+    description: 'Solve crossword clues related to the Indian Constitution. Test your knowledge of Articles, Rights, and Constitutional figures!',
+    icon: <Grid3x3 className="w-8 h-8" />,
+    route: '/crossword',
+    isEnabled: true,
+    color: 'text-[hsl(var(--primary))] ',
+    gradient: 'from-amber-300 to-yellow-500',
+    gameId: 'crossword'
   },
   {
     id: 'treasure-hunt',

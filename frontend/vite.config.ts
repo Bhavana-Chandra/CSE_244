@@ -22,4 +22,8 @@ export default defineConfig(({ mode }) => ({
   },
   // Ensure JSON files are properly imported
   assetsInclude: ['**/*.json'],
+  // Exclude Expo project directory from Vite processing
+  optimizeDeps: {
+    exclude: ['RightsVsDutiesChallenge'],
+  },
 }));

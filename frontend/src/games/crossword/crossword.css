@@ -1,0 +1,169 @@
+/* Yellow background consistent with Games Hub */
+.cw-page {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #fff200 0%, #ffea3b 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+  box-sizing: border-box;
+}
+
+.cw-header {
+  width: 100%;
+  max-width: 960px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.cw-header h2 {
+  margin: 0;
+  font-weight: 700;
+}
+
+.cw-stats {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.cw-score, .cw-time {
+  background: #fff;
+  border-radius: 12px;
+  padding: 8px 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.cw-score span, .cw-time span {
+  font-size: 12px;
+  color: #555;
+  display: block;
+}
+
+.cw-score strong, .cw-time strong {
+  font-size: 16px;
+  color: #222;
+}
+
+.cw-content {
+  width: 100%;
+  max-width: 960px;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  justify-items: center;
+}
+
+.cw-grid {
+  display: grid;
+  gap: 6px;
+  padding: 12px;
+  border: 2px solid #222;
+  border-radius: 12px;
+  background-color: rgba(255,255,255,0.9);
+}
+
+.cw-cell {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: inset 0 0 0 1px #ccc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.cw-empty {
+  background: transparent;
+  box-shadow: none;
+}
+
+.cw-number {
+  position: absolute;
+  top: 3px;
+  left: 5px;
+  font-size: 11px;
+  color: #222;
+}
+
+.cw-input {
+  width: 100%;
+  height: 100%;
+  border: none;
+  outline: none;
+  background: transparent;
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 18px;
+  text-align: center;
+}
+
+.cw-input.cw-locked {
+  color: #1a73e8;
+}
+
+.cw-controls {
+  display: flex;
+  gap: 12px;
+}
+
+.cw-btn {
+  background: #1a73e8;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 16px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.cw-btn:disabled {
+  background: #9fb9eb;
+  cursor: default;
+}
+
+.cw-complete {
+  background: #fff;
+  padding: 12px 16px;
+  border-radius: 12px;
+  font-weight: 700;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.cw-clues {
+  width: 100%;
+}
+
+.cw-clue {
+  background: #fff;
+  border-radius: 12px;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* Level label bottom */
+.cw-level-title {
+  font-weight: 700;
+  padding: 6px 10px;
+  background: #fff;
+  border-radius: 8px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 540px) {
+  .cw-grid {
+    grid-template-columns: unset !important;
+  }
+  .cw-cell {
+    width: 34px;
+    height: 34px;
+  }
+  .cw-input {
+    font-size: 16px;
+  }
+}

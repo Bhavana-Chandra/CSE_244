@@ -1,0 +1,247 @@
+{
+  "levels": [
+    {
+      "id": 1,
+      "name": "Level 1: Getting Started",
+      "difficulty": "easy",
+      "pairs": [
+        {
+          "right": {
+            "id": "r1",
+            "title": "Freedom of Speech",
+            "article": "Article 19(1)(a)",
+            "icon": "speech"
+          },
+          "duty": {
+            "id": "d1",
+            "title": "Use words responsibly",
+            "icon": "responsibility"
+          },
+          "explanation": "While you have the right to express your opinions freely, you also have a duty to use this freedom responsibly, without spreading hate or false information that could harm others."
+        },
+        {
+          "right": {
+            "id": "r2",
+            "title": "Right to Vote",
+            "article": "Article 326",
+            "icon": "vote"
+          },
+          "duty": {
+            "id": "d2",
+            "title": "Vote sincerely and avoid bribery",
+            "icon": "vote-duty"
+          },
+          "explanation": "Every citizen has the right to vote, but with this right comes the duty to vote sincerely, make informed choices, and never accept or offer bribes during elections."
+        },
+        {
+          "right": {
+            "id": "r3",
+            "title": "Right to Education",
+            "article": "Article 21A",
+            "icon": "education"
+          },
+          "duty": {
+            "id": "d3",
+            "title": "Support school attendance",
+            "icon": "education-duty"
+          },
+          "explanation": "Children have the right to free and compulsory education, and parents have the duty to ensure their children attend school regularly and complete their education."
+        }
+      ],
+      "timeLimit": null,
+      "hints": 3
+    },
+    {
+      "id": 2,
+      "name": "Level 2: Building Understanding",
+      "difficulty": "medium",
+      "pairs": [
+        {
+          "right": {
+            "id": "r4",
+            "title": "Right to Equality",
+            "article": "Article 14",
+            "icon": "equality"
+          },
+          "duty": {
+            "id": "d4",
+            "title": "Treat everyone with respect",
+            "icon": "respect"
+          },
+          "explanation": "The Constitution guarantees equality before law. In return, we must treat all individuals with equal respect, regardless of their background, religion, or social status."
+        },
+        {
+          "right": {
+            "id": "r5",
+            "title": "Right to Freedom of Religion",
+            "article": "Article 25",
+            "icon": "religion"
+          },
+          "duty": {
+            "id": "d5",
+            "title": "Respect others' beliefs",
+            "icon": "tolerance"
+          },
+          "explanation": "You have the freedom to practice any religion, but you must also respect others' right to practice their own religion without interference or discrimination."
+        },
+        {
+          "right": {
+            "id": "r6",
+            "title": "Right to Constitutional Remedies",
+            "article": "Article 32",
+            "icon": "remedy"
+          },
+          "duty": {
+            "id": "d6",
+            "title": "Follow court orders",
+            "icon": "court"
+          },
+          "explanation": "Citizens can approach the courts to protect their rights, but they also have a duty to respect and follow court orders and legal judgments."
+        },
+        {
+          "right": {
+            "id": "r7",
+            "title": "Right to Life and Personal Liberty",
+            "article": "Article 21",
+            "icon": "life"
+          },
+          "duty": {
+            "id": "d7",
+            "title": "Protect others' safety",
+            "icon": "safety"
+          },
+          "explanation": "Every person has the right to life and liberty, which means we all have a duty to protect the safety and well-being of others in our community."
+        },
+        {
+          "right": {
+            "id": "r8",
+            "title": "Right to Property",
+            "article": "Article 300A",
+            "icon": "property"
+          },
+          "duty": {
+            "id": "d8",
+            "title": "Respect others' property",
+            "icon": "property-duty"
+          },
+          "explanation": "You have the right to own property, but you must also respect others' property rights and not damage or unlawfully take what belongs to others."
+        }
+      ],
+      "distractors": [
+        {
+          "id": "dist1",
+          "title": "Pay taxes on time",
+          "icon": "taxes"
+        }
+      ],
+      "timeLimit": 90,
+      "hints": 2
+    },
+    {
+      "id": 3,
+      "name": "Level 3: Advanced Challenge",
+      "difficulty": "hard",
+      "pairs": [
+        {
+          "right": {
+            "id": "r9",
+            "title": "Right to Privacy",
+            "article": "Article 21",
+            "icon": "privacy"
+          },
+          "duty": {
+            "id": "d9",
+            "title": "Respect others' privacy",
+            "icon": "privacy-duty"
+          },
+          "explanation": "Your right to privacy means others must respect your personal space and information, just as you must respect theirs and not intrude without consent."
+        },
+        {
+          "right": {
+            "id": "r10",
+            "title": "Right to Assembly",
+            "article": "Article 19(1)(b)",
+            "icon": "assembly"
+          },
+          "duty": {
+            "id": "d10",
+            "title": "Assemble peacefully",
+            "icon": "peace"
+          },
+          "explanation": "You can gather with others to express your views, but you must do so peacefully without causing harm, violence, or disruption to public order."
+        },
+        {
+          "right": {
+            "id": "r11",
+            "title": "Right to Form Associations",
+            "article": "Article 19(1)(c)",
+            "icon": "association"
+          },
+          "duty": {
+            "id": "d11",
+            "title": "Use associations for lawful purposes",
+            "icon": "lawful"
+          },
+          "explanation": "You can form groups and organizations, but these must be used for lawful purposes and should not promote illegal activities or harm to society."
+        },
+        {
+          "right": {
+            "id": "r12",
+            "title": "Right to Move Freely",
+            "article": "Article 19(1)(d)",
+            "icon": "movement"
+          },
+          "duty": {
+            "id": "d12",
+            "title": "Follow traffic and safety rules",
+            "icon": "traffic"
+          },
+          "explanation": "You can travel anywhere in India, but you must follow traffic rules, respect public spaces, and ensure your movement doesn't endanger others."
+        },
+        {
+          "right": {
+            "id": "r13",
+            "title": "Right to Practice Any Profession",
+            "article": "Article 19(1)(g)",
+            "icon": "profession"
+          },
+          "duty": {
+            "id": "d13",
+            "title": "Practice ethically and legally",
+            "icon": "ethics"
+          },
+          "explanation": "You can choose any profession or business, but you must practice it ethically, follow regulations, and ensure your work doesn't harm others or the environment."
+        },
+        {
+          "right": {
+            "id": "r14",
+            "title": "Right Against Exploitation",
+            "article": "Article 23",
+            "icon": "exploitation"
+          },
+          "duty": {
+            "id": "d14",
+            "title": "Never exploit others",
+            "icon": "no-exploit"
+          },
+          "explanation": "The Constitution protects you from exploitation, and you have a corresponding duty to never exploit others, especially vulnerable groups like children and workers."
+        }
+      ],
+      "distractors": [
+        {
+          "id": "dist2",
+          "title": "Pay taxes on time",
+          "icon": "taxes"
+        },
+        {
+          "id": "dist3",
+          "title": "Serve in the military",
+          "icon": "military"
+        }
+      ],
+      "timeLimit": 60,
+      "hints": 1
+    }
+  ]
+}
+

@@ -27,6 +27,18 @@ interface GameState {
       currentStage: number;
       unlockedStages: number;
     };
+    'rights-duties': {
+      score: number;
+      bestScore: number;
+      gamesPlayed: number;
+      progress: number; // percentage
+    };
+    'crossword': {
+      score: number;
+      bestScore: number;
+      gamesPlayed: number;
+      progress: number; // percentage
+    };
   };
 }
 
@@ -80,6 +92,18 @@ const createDefaultState = (): GameState => ({
       progress: 0,
       currentStage: 1,
       unlockedStages: 1
+    },
+    'rights-duties': {
+      score: 0,
+      bestScore: 0,
+      gamesPlayed: 0,
+      progress: 0
+    },
+    'crossword': {
+      score: 0,
+      bestScore: 0,
+      gamesPlayed: 0,
+      progress: 0
     }
   }
 });

@@ -15,6 +15,8 @@ import GamesHub from "./pages/GamesHub";
 import MemoryMatch from "./pages/MemoryMatch";
 import SpinLearn from "./pages/SpinLearn";
 import GrowingTreeGame from "./games/GrowingTree/index";
+import RightsVsDuties from "./pages/RightsVsDuties";
+import CrosswordChallenge from "./pages/CrosswordChallenge";
 import Progress from "./pages/Progress";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -43,6 +45,8 @@ const App = () => (
               <Route path="/memory-match" element={<MemoryMatch />} />
               <Route path="/spin-learn" element={<SpinLearn />} />
               <Route path="/growing-tree" element={<GrowingTreeGame />} />
+              <Route path="/rights-duties" element={<RightsVsDuties />} />
+              <Route path="/crossword" element={<CrosswordChallenge />} />
               <Route path="/progress" element={<Progress />} />
               <Route path="/quick-links" element={<QuickLinks />} />
               <Route path="/login" element={<Login />} />

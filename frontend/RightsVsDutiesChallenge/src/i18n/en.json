@@ -1,0 +1,68 @@
+{
+  "splash": {
+    "title": "Rights vs. Duties Challenge",
+    "subtitle": "Learn constitutional rights and duties"
+  },
+  "mainMenu": {
+    "title": "Main Menu",
+    "play": "Play",
+    "practice": "Practice",
+    "leaderboard": "Leaderboard",
+    "settings": "Settings",
+    "about": "About"
+  },
+  "levelSelect": {
+    "title": "Select Level",
+    "easy": "Easy",
+    "medium": "Medium",
+    "hard": "Hard",
+    "stars": "Stars",
+    "progress": "Progress",
+    "locked": "Locked",
+    "completed": "Completed"
+  },
+  "game": {
+    "title": "Rights vs. Duties Challenge",
+    "instruction": "Match rights to duties",
+    "check": "Check",
+    "hint": "Hint",
+    "score": "Score",
+    "time": "Time",
+    "correct": "Correct!",
+    "incorrect": "Try again!",
+    "allMatched": "All matched!",
+    "hintUsed": "Hint used",
+    "noHintsLeft": "No hints left"
+  },
+  "result": {
+    "title": "Level Complete!",
+    "score": "Score",
+    "stars": "Stars Earned",
+    "correctPairs": "Correct Pairs",
+    "replay": "Replay",
+    "nextLevel": "Next Level",
+    "backToMenu": "Back to Menu"
+  },
+  "practice": {
+    "title": "Practice Mode",
+    "instruction": "Match each right to its corresponding duty",
+    "learnMore": "Learn More",
+    "next": "Next",
+    "back": "Back"
+  },
+  "settings": {
+    "title": "Settings",
+    "sound": "Sound",
+    "difficulty": "Difficulty",
+    "textSize": "Text Size",
+    "language": "Language",
+    "resetProgress": "Reset Progress"
+  },
+  "about": {
+    "title": "About",
+    "description": "Rights vs. Duties Challenge is an educational game that helps you learn about constitutional rights and their corresponding duties. Match each right with its duty to understand how rights and responsibilities go hand in hand.",
+    "version": "Version 1.0.0",
+    "credits": "Credits"
+  }
+}
+
