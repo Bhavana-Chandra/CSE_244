@@ -219,4 +219,21 @@ All colors MUST be HSL.
     background: var(--gradient-secondary);
     color: white;
   }
+
+  /* Google Translate dropdown styling to match header theme */
+  #google_translate_element .goog-te-gadget {
+    display: flex;
+    align-items: center;
+  }
+
+  #google_translate_element .goog-te-combo {
+    @apply text-sm px-4 py-2 rounded-lg border;
+    color: hsl(var(--foreground));
+    background-color: hsl(var(--card));
+  }
+
+  /* Ensure spacing aligns with header items */
+  #google_translate_element {
+    @apply ml-2;
+  }
 }

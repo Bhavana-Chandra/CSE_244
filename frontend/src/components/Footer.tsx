@@ -15,38 +15,37 @@ const Footer = () => {
               <div className="w-8 h-8 bg-gradient-to-br from-primary via-gold to-accent rounded-lg flex items-center justify-center">
                 <BookOpen className="w-5 h-5 text-white" />
               </div>
-              <span className="text-lg font-bold">{t('common.appName')}</span>
+              <span className="text-lg font-bold">{t('AppName')}</span>
             </div>
             <p className="text-sm text-muted leading-relaxed">
-              {t('common.appDescription')}
+              {t('AppDescription')}
             </p>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="font-semibold mb-4">{t('navigation.quickLinks')}</h3>
+            <h3 className="font-semibold mb-4">{t('QuickLinks')}</h3>
             <ul className="space-y-2 text-sm">
-              <li><Link to="/articles" className="hover:text-primary transition-colors">{t('navigation.articles')}</Link></li>
-              <li><Link to="/scenarios" className="hover:text-primary transition-colors">{t('navigation.scenarios')}</Link></li>
-              <li><Link to="/ai-assistant" className="hover:text-primary transition-colors">{t('navigation.aiAssistant')}</Link></li>
-              <li><Link to="/progress" className="hover:text-primary transition-colors">{t('navigation.progress')}</Link></li>
+              <li><Link to="/parts" className="hover:text-primary transition-colors">{t('Articles')}</Link></li>
+              <li><Link to="/scenarios" className="hover:text-primary transition-colors">{t('Scenarios')}</Link></li>
+              <li><Link to="/progress" className="hover:text-primary transition-colors">{t('Progress')}</Link></li>
             </ul>
           </div>
 
           {/* Learning Categories */}
           <div>
-            <h3 className="font-semibold mb-4">{t('navigation.learningTopics')}</h3>
+            <h3 className="font-semibold mb-4">{t('LearningTopics')}</h3>
             <ul className="space-y-2 text-sm">
-              <li><Link to="/articles?category=rights" className="hover:text-primary transition-colors">{t('navigation.fundamentalRights')}</Link></li>
-              <li><Link to="/articles?category=duties" className="hover:text-primary transition-colors">{t('navigation.fundamentalDuties')}</Link></li>
-              <li><Link to="/articles?category=government" className="hover:text-primary transition-colors">{t('navigation.governmentStructure')}</Link></li>
-              <li><Link to="/articles?category=amendments" className="hover:text-primary transition-colors">{t('navigation.constitutionalAmendments')}</Link></li>
+              <li>{t('FundamentalRights')}</li>
+              <li>{t('FundamentalDuties')}</li>
+              <li>{t('GovernmentStructure')}</li>
+              <li>{t('ConstitutionalAmendments')}</li>
             </ul>
           </div>
 
           {/* Contact Info */}
           <div>
-            <h3 className="font-semibold mb-4">{t('navigation.connectWithUs')}</h3>
+            <h3 className="font-semibold mb-4">{t('ConnectWithUs')}</h3>
             <ul className="space-y-2 text-sm">
               <li className="flex items-center space-x-2">
                 <Mail className="w-4 h-4" />
@@ -67,11 +66,11 @@ const Footer = () => {
         <hr className="my-8 border-muted" />
 
         <div className="flex flex-col md:flex-row justify-between items-center text-sm text-muted">
-          <p>&copy; 2024 {t('common.appName')}. {t('common.allRightsReserved')}</p>
+          <p>&copy; 2025 {t('Constitution Explorer')}. {t('AllRightsReserved')}</p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <Link to="/privacy" className="hover:text-primary transition-colors">{t('navigation.privacyPolicy')}</Link>
-            <Link to="/terms" className="hover:text-primary transition-colors">{t('navigation.termsOfService')}</Link>
-            <Link to="/accessibility" className="hover:text-primary transition-colors">{t('navigation.accessibility')}</Link>
+            <Link to="/privacy" className="hover:text-primary transition-colors">{t('PrivacyPolicy')}</Link>
+            <Link to="/terms" className="hover:text-primary transition-colors">{t('TermsOfService')}</Link>
+            <Link to="/accessibility" className="hover:text-primary transition-colors">{t('Accessibility')}</Link>
           </div>
         </div>
       </div>

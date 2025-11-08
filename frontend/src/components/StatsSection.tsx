@@ -53,7 +53,7 @@ const StatsSection = () => {
               <div className="w-12 h-12 mx-auto mb-4 bg-white/20 rounded-full flex items-center justify-center">
                 <Award className="w-6 h-6 text-white" />
               </div>
-              <div className="text-3xl font-bold text-white mb-2">12</div>
+              <div className="text-3xl font-bold text-white mb-2">12+</div>
               <div className="text-blue-100 text-sm">Languages Supported</div>
             </CardContent>
           </Card>

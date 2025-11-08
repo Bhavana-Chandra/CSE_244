@@ -7,50 +7,50 @@ import { useTranslation } from "react-i18next";
 const getFeatures = (t) => [
   {
     icon: BookOpen,
-    title: t('features.interactiveLearning.title'),
-    description: t('features.interactiveLearning.description'),
+    title: t('InteractiveLearning'),
+    description: t('Engage with dynamic lessons, quizzes, and activities that make understanding the Constitution simple and enjoyable.'),
     color: "text-primary"
   },
   {
     icon: Brain,
-    title: t('features.aiAssistant.title'),
-    description: t('features.aiAssistant.description'),
+    title: t('AI Assistant'),
+    description: t('Get instant help from an AI-powered assistant available in multiple Indian languages for easy comprehension.'),
     color: "text-secondary"
   },
   {
     icon: Globe,
-    title: t('features.multilingualSupport.title'),
-    description: t('features.multilingualSupport.description'),
+    title: t('MultilingualSupport'),
+    description: t('Learn in your preferred language with complete support for multiple Indian and global languages.'),
     color: "text-accent"
   },
   {
     icon: BarChart3,
-    title: t('features.progressTracking.title'),
-    description: t('features.progressTracking.description'),
+    title: t('ProgressTracking'),
+    description: t('Monitor your learning journey with real-time progress reports and personalized insights.'),
     color: "text-gold"
   },
   {
     icon: Users,
-    title: t('features.communityLearning.title'),
-    description: t('features.communityLearning.description'),
+    title: t('CommunityLearning'),
+    description: t('Collaborate, discuss, and share knowledge with fellow learners in an interactive community space.'),
     color: "text-info"
   },
   {
     icon: Award,
-    title: t('features.gamifiedExperience.title'),
-    description: t('features.gamifiedExperience.description'),
+    title: t('GamifiedExperience'),
+    description: t('Stay motivated through quizzes, rewards, and achievements that turn learning into a fun challenge.'),
     color: "text-warning"
   },
   {
     icon: Zap,
-    title: t('features.quickReferences.title'),
-    description: t('features.quickReferences.description'),
+    title: t('QuickReferences'),
+    description: t('Access quick reference materials for key sections of the Constitution, making learning efficient and convenient.'),
     color: "text-primary"
   },
   {
     icon: Shield,
-    title: t('features.authenticContent.title'),
-    description: t('features.authenticContent.description'),
+    title: t('AuthenticContent'),
+    description: t('Learn from verified, reliable, and up-to-date information sourced from official constitutional documents.'),
     color: "text-accent"
   }
 ];
@@ -64,11 +64,9 @@ const FeaturesSection = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-foreground mb-4">
-            {t('features.sectionTitle')}
+            {t('Explore every Feature of the Constitution')}
           </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            {t('features.sectionDescription')}
-          </p>
+          
         </div>
 
         {/* Games Hub Promo Card */}
@@ -81,15 +79,15 @@ const FeaturesSection = () => {
                     <Gamepad2 className="w-8 h-8" />
                   </div>
                   <div>
-                    <h3 className="text-2xl font-bold mb-2">{t('features.gamesHub.title')}</h3>
+                    <h3 className="text-2xl font-bold mb-2">{t('GamesHubTitle')}</h3>
                     <p className="text-purple-100 max-w-md">
-                      {t('features.gamesHub.description')}
+                      {t('GamesHubDescription')}
                     </p>
                   </div>
                 </div>
                 <Link to="/games">
                   <Button size="lg" className="bg-white text-purple-600 hover:bg-purple-50 font-semibold">
-                    {t('features.gamesHub.exploreButton')}
+                    {t('ExploreButton')}
                   </Button>
                 </Link>
               </div>

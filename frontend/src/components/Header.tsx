@@ -63,6 +63,39 @@ const Header: React.FC = () => {
     setIsOpen(false);
   };
 
+  // Inject Google Translate script and initialize widget inside Header
+  useEffect(() => {
+    // Define global init callback
+    (window as any).googleTranslateElementInit = () => {
+      try {
+        const googleObj = (window as any).google;
+        if (googleObj && googleObj.translate) {
+          new googleObj.translate.TranslateElement(
+            { pageLanguage: "en" },
+            "google_translate_element"
+          );
+        }
+      } catch (e) {
+        // fail silently to avoid breaking header
+      }
+    };
+
+    // Inject script only once
+    const existing = document.getElementById("google-translate-script");
+    if (!existing) {
+      const script = document.createElement("script");
+      script.id = "google-translate-script";
+      script.type = "text/javascript";
+      script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+      document.body.appendChild(script);
+    } else {
+      // If script is already present, try to initialize immediately
+      if ((window as any).google && (window as any).google.translate) {
+        (window as any).googleTranslateElementInit();
+      }
+    }
+  }, []);
+
   return (
     <header className={`sticky top-0 z-50 transition-all duration-300 ${
       isScrolled 
@@ -78,10 +111,10 @@ const Header: React.FC = () => {
               whileTap={{ scale: 0.95 }}
               className="bg-gradient-to-r from-saffron to-orange-500 p-2 rounded-lg"
             >
-              <BookOpen className="h-6 w-6 text-white" />
+              <BookOpen className="h-6 w-6 text-black" />
             </motion.div>
             <div className="hidden sm:block">
-              <h1 className="text-xl font-bold bg-gradient-to-r from-saffron to-orange-500 bg-clip-text text-transparent">
+              <h1 className="text-xl font-bold text-muted-foreground ">
                 Constitution Explorer
               </h1>
               <p className="text-xs text-muted-foreground">Learn • Explore • Understand</p>
@@ -101,53 +134,13 @@ const Header: React.FC = () => {
                 </Link>
               </motion.div>
             ))}
+
+            {/* Google Translate dropdown aligned to the right of Progress */}
+            <div id="google_translate_element" className="ml-2 flex items-center" />
           </div>
 
-          {/* Right side - User Menu */}
-          <div className="flex items-center space-x-3">
-            {/* Language Selector */}
-            <div className="relative">
-              <button
-                onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
-                className="flex items-center space-x-2 px-3 py-2 rounded-lg text-sm font-medium text-gray-700 hover:text-orange-600 hover:bg-orange-50 transition-all duration-200"
-              >
-                <Globe className="h-4 w-4" />
-                <span className="hidden sm:inline">{language.toUpperCase()}</span>
-                <ChevronDown className="h-4 w-4" />
-              </button>
-              
-              <AnimatePresence>
-                {isUserMenuOpen && (
-                  <motion.div
-                    initial={{ opacity: 0, y: -10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 z-50"
-                  >
-                    <div className="py-2">
-                      <button
-                        onClick={() => handleLanguageChange("en")}
-                        className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition-colors"
-                      >
-                        English
-                      </button>
-                      <button
-                        onClick={() => handleLanguageChange("hi")}
-                        className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition-colors"
-                      >
-                        Hindi
-                      </button>
-                      <button
-                        onClick={() => handleLanguageChange("ta")}
-                        className="w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-orange-50 hover:text-orange-600 transition-colors"
-                      >
-                        Tamil
-                      </button>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </div>
+        
+           
 
             {/* User Menu */}
             {user ? (
@@ -202,7 +195,7 @@ const Header: React.FC = () => {
               <div className="flex items-center space-x-2">
                 <Link to="/login">
                   <Button variant="ghost" size="sm">
-                    Sign In
+                    Login
                   </Button>
                 </Link>
                 <Link to="/register">
@@ -260,7 +253,7 @@ const Header: React.FC = () => {
               </Sheet>
             </div>
           </div>
-        </div>
+        
       </nav>
     </header>
   );

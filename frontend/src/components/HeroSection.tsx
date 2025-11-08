@@ -30,7 +30,7 @@ const HeroSection = () => {
                   <ArrowRight className="w-5 h-5 ml-2" />
                 </Button>
               </Link>
-              <Link to="/articles">
+              <Link to="/parts">
                 <Button variant="outline" size="lg" className="btn-outline-saffron w-full sm:w-auto">
                   Explore Articles
                 </Button>
@@ -57,7 +57,7 @@ const HeroSection = () => {
                 <div className="flex items-center justify-center w-8 h-8 bg-gold/10 rounded-full mx-auto mb-2">
                   <Globe className="w-4 h-4 text-gold" />
                 </div>
-                <div className="text-2xl font-bold text-foreground">12</div>
+                <div className="text-2xl font-bold text-foreground">12+</div>
                 <div className="text-sm text-muted-foreground">Languages</div>
               </Card>
             </div>
