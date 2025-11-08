@@ -11,6 +11,7 @@ import Articles from "./pages/Articles";
 import ArticleDetail from "./pages/ArticleDetail";
 import Scenarios from "./pages/Scenarios";
 import ScenarioDetail from "./pages/ScenarioDetail";
+import PartDetail from "./pages/PartDetail";
 import GamesHub from "./pages/GamesHub";
 import MemoryMatch from "./pages/MemoryMatch";
 import SpinLearn from "./pages/SpinLearn";
@@ -37,10 +38,11 @@ const App = () => (
           <BrowserRouter>
             <Routes>
               <Route path="/" element={<Index />} />
-              <Route path="/articles" element={<Articles />} />
+              <Route path="/parts" element={<Articles />} />
               <Route path="/articles/:id" element={<ArticleDetail />} />
               <Route path="/scenarios" element={<Scenarios />} />
               <Route path="/scenarios/:id" element={<ScenarioDetail />} />
+              <Route path="/parts/:id" element={<PartDetail />} />
               <Route path="/games" element={<GamesHub />} />
               <Route path="/memory-match" element={<MemoryMatch />} />
               <Route path="/spin-learn" element={<SpinLearn />} />

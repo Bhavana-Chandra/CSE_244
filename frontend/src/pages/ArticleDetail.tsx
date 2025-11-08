@@ -1,212 +1,277 @@
-import React, { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { ArrowLeft, BookOpen, Bookmark, Share2, Download, Eye, EyeOff } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import { Button } from "@/components/ui/button";
-import { Checkbox } from "@/components/ui/checkbox";
-import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/components/ui/use-toast";
-import { Link } from "react-router-dom";
-import { BookOpen } from "lucide-react";
+import { Link, useParams, useNavigate } from "react-router-dom";
+import { motion } from "framer-motion";
 
-// Sample article data structure
-interface Article {
-  id: number;
+interface ConstitutionArticle {
   number: string;
   title: string;
-  standard: string;
-  simplified: string;
-  relatedArticles: RelatedArticle[];
+  text: string;
 }
 
-interface RelatedArticle {
-  id: number;
-  title: string;
-}
+const ArticleDetail = () => {
+  const { number } = useParams<{ number: string }>();
+  const navigate = useNavigate();
+  const [article, setArticle] = useState<ConstitutionArticle | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [simplifiedLanguage, setSimplifiedLanguage] = useState(false);
+  const [notes, setNotes] = useState("");
+  const [bookmarked, setBookmarked] = useState(false);
+  const [allArticles, setAllArticles] = useState<ConstitutionArticle[]>([]);
 
-// Sample articles data
-const articlesData: Record<string, Article> = {
-  "1": {
-    id: 1,
-    number: "Article 19",
-    title: "Freedom of Speech and Expression",
-    standard: "Article 19 of the Indian Constitution guarantees to all citizens the right to freedom of speech and expression, which includes the right to express one's own convictions and opinions freely by words of mouth, writing, printing, pictures or any other mode. It includes the freedom of communication and the right to propagate or publish one's views. The freedom of speech and expression also includes the right to remain silent.",
-    simplified: "Article 19 gives you the right to express your thoughts and opinions freely through speaking, writing, or any other way. You can share your ideas with others, publish your views, and even choose to stay silent if you want.",
-    relatedArticles: [
-      { id: 21, title: "Right to Life and Personal Liberty" },
-      { id: 14, title: "Equality Before Law" }
-    ]
-  },
-  "2": {
-    id: 2,
-    number: "Article 21",
-    title: "Right to Life and Personal Liberty",
-    standard: "Article 21 of the Constitution of India states that 'No person shall be deprived of his life or personal liberty except according to procedure established by law.' This fundamental right is available to every person, citizens and foreigners alike. The Supreme Court has interpreted this article to include various rights such as the right to live with human dignity, right to livelihood, right to health, right to pollution-free air, etc.",
-    simplified: "Article 21 protects your life and personal freedom. The government cannot take these away from you unless they follow proper legal procedures. This right includes living with dignity, having a job, access to healthcare, and clean air.",
-    relatedArticles: [
-      { id: 19, title: "Freedom of Speech and Expression" },
-      { id: 14, title: "Equality Before Law" }
-    ]
-  },
-  "14": {
-    id: 14,
-    number: "Article 14",
-    title: "Equality Before Law",
-    standard: "Article 14 of the Indian Constitution guarantees equality before law and equal protection of laws to all persons within the territory of India. It embodies the general principle of equality and prohibits unreasonable discrimination between persons. The concept of 'equality before law' is a declaration of equality of all persons within the territory of India, implying thereby the absence of any special privilege in favor of any individual. Every person, whatever be his rank or position is subject to the jurisdiction of the ordinary courts.",
-    simplified: "Article 14 means everyone should be treated equally by the law, regardless of their background. No one gets special treatment in court, and the government can't discriminate against people without a good reason.",
-    relatedArticles: [
-      { id: 19, title: "Freedom of Speech and Expression" },
-      { id: 21, title: "Right to Life and Personal Liberty" }
-    ]
-  }
-};
-
-const ArticleDetail: React.FC = () => {
-  const { id } = useParams<{ id: string }>();
-  const [isSimplified, setIsSimplified] = useState<boolean>(false);
-  const [isBookmarked, setIsBookmarked] = useState<boolean>(false);
-  const [notes, setNotes] = useState<string>("");
-  const { toast } = useToast();
-  
-  const article = articlesData[id || "14"]; // Default to Article 14 if no ID is provided
-  
-  // Load saved notes from localStorage on component mount
   useEffect(() => {
-    if (id) {
-      const savedNotes = localStorage.getItem(`article-notes-${id}`);
-      if (savedNotes) {
-        setNotes(savedNotes);
+    const loadArticleData = async () => {
+      try {
+        // Load all articles from CSV
+        const response = await fetch('/Constitution Of India.csv');
+        const text = await response.text();
+        const lines = text.split('\n').slice(1); // Skip header
+        
+        const articles: ConstitutionArticle[] = [];
+        for (const line of lines) {
+          const parts = line.split(',');
+          if (parts.length >= 3) {
+            articles.push({
+              number: parts[0].trim(),
+              title: parts[1].trim(),
+              text: parts[2].trim()
+            });
+          }
+        }
+        
+        setAllArticles(articles);
+        
+        // Find current article
+        const currentArticle = articles.find(a => a.number === number);
+        setArticle(currentArticle || null);
+        
+        // Load saved notes and bookmarks
+        const savedNotes = localStorage.getItem(`article-notes-${number}`);
+        const savedBookmarks = JSON.parse(localStorage.getItem('bookmarked-articles') || '[]');
+        
+        if (savedNotes) setNotes(savedNotes);
+        if (savedBookmarks.includes(number)) setBookmarked(true);
+        
+      } catch (error) {
+        console.error('Error loading article data:', error);
+      } finally {
+        setLoading(false);
       }
-      
-      const bookmarkStatus = localStorage.getItem(`article-bookmark-${id}`);
-      setIsBookmarked(bookmarkStatus === "true");
+    };
+
+    loadArticleData();
+  }, [number]);
+
+  const handlePrevious = () => {
+    if (!article || !allArticles.length) return;
+    const currentIndex = allArticles.findIndex(a => a.number === article.number);
+    if (currentIndex > 0) {
+      navigate(`/articles/${allArticles[currentIndex - 1].number}`);
     }
-  }, [id]);
-  
-  // Save notes to localStorage
-  const saveNotes = () => {
-    if (id) {
-      localStorage.setItem(`article-notes-${id}`, notes);
-      toast({
-        title: "Successfully saved",
-        description: "Your notes have been saved locally",
+  };
+
+  const handleNext = () => {
+    if (!article || !allArticles.length) return;
+    const currentIndex = allArticles.findIndex(a => a.number === article.number);
+    if (currentIndex < allArticles.length - 1) {
+      navigate(`/articles/${allArticles[currentIndex + 1].number}`);
+    }
+  };
+
+  const handleBookmark = () => {
+    const savedBookmarks = JSON.parse(localStorage.getItem('bookmarked-articles') || '[]');
+    let newBookmarks;
+    
+    if (bookmarked) {
+      newBookmarks = savedBookmarks.filter((id: string) => id !== number);
+    } else {
+      newBookmarks = [...savedBookmarks, number];
+    }
+    
+    localStorage.setItem('bookmarked-articles', JSON.stringify(newBookmarks));
+    setBookmarked(!bookmarked);
+  };
+
+  const handleNotesChange = (newNotes: string) => {
+    setNotes(newNotes);
+    localStorage.setItem(`article-notes-${number}`, newNotes);
+  };
+
+  const handleShare = () => {
+    if (navigator.share && article) {
+      navigator.share({
+        title: `Article ${article.number} - ${article.title}`,
+        text: `Check out Article ${article.number} of the Indian Constitution`,
+        url: window.location.href,
       });
+    } else {
+      navigator.clipboard.writeText(window.location.href);
+      alert('Link copied to clipboard!');
     }
   };
-  
-  // Toggle bookmark status
-  const toggleBookmark = () => {
-    const newStatus = !isBookmarked;
-    setIsBookmarked(newStatus);
-    if (id) {
-      localStorage.setItem(`article-bookmark-${id}`, String(newStatus));
-    }
+
+  const handleDownload = () => {
+    if (!article) return;
+    
+    const content = `Article ${article.number} - ${article.title}\n\n${article.text}`;
+    const blob = new Blob([content], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `article-${article.number}.txt`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
   };
+
+  const getProgress = () => {
+    if (!article || !allArticles.length) return 0;
+    const currentIndex = allArticles.findIndex(a => a.number === article.number);
+    return ((currentIndex + 1) / allArticles.length) * 100;
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Header />
+        <main className="container mx-auto px-4 py-8">
+          <div className="flex items-center justify-center h-64">
+            <div className="text-center">
+              <BookOpen className="w-12 h-12 text-muted-foreground mx-auto mb-4 animate-pulse" />
+              <p className="text-muted-foreground">Loading article...</p>
+            </div>
+          </div>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
   if (!article) {
     return (
-      <div className="min-h-screen bg-yellow-300">
+      <div className="min-h-screen bg-background">
         <Header />
-        <div className="container mx-auto px-4 py-12">
-          <div className="text-center">
-            <h1 className="text-3xl font-bold mb-4">Article not found</h1>
-            <Link to="/articles" className="text-primary hover:underline">
-              Return to Articles
+        <main className="container mx-auto px-4 py-8">
+          <div className="text-center py-12">
+            <BookOpen className="w-12 h-12 text-muted-foreground mx-auto mb-4" />
+            <h3 className="text-lg font-semibold text-foreground mb-2">Article not found</h3>
+            <p className="text-muted-foreground">The requested article could not be found.</p>
+            <Link to="/articles">
+              <Button variant="outline" className="mt-4">
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                Back to Articles
+              </Button>
             </Link>
           </div>
-        </div>
+        </main>
         <Footer />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-yellow-300">
+    <div className="min-h-screen bg-background">
       <Header />
       
-      <main className="container mx-auto px-4 py-8">
-        {/* Breadcrumb */}
-        <div className="mb-6 text-sm">
-          <Link to="/articles" className="hover:underline">Articles</Link>
-          {" / "}
-          <span>{article.number} {article.title}</span>
-        </div>
-        
-        <div className="grid lg:grid-cols-3 gap-8">
-          {/* Main Content Area */}
-          <div className="lg:col-span-2">
-            <div className="bg-white rounded-lg shadow-md p-6">
-              {/* Article Header */}
-              <div className="mb-6">
-                <div className="text-sm text-muted-foreground mb-1">{article.number}</div>
-                <h1 className="text-3xl font-bold mb-4">{article.title}</h1>
-                
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-2">
-                    <Checkbox 
-                      id="simplified"
-                      checked={isSimplified}
-                      onCheckedChange={() => setIsSimplified(!isSimplified)}
-                    />
-                    <label htmlFor="simplified" className="text-sm cursor-pointer">Simplified</label>
-                  </div>
-                  
-                  <Button 
-                    onClick={toggleBookmark}
-                    variant={isBookmarked ? "default" : "outline"}
-                    className={isBookmarked ? "bg-orange-500 hover:bg-orange-600" : ""}
-                  >
-                    {isBookmarked ? "Bookmarked" : "Bookmark"}
-                  </Button>
-                </div>
-              </div>
-              
-              {/* Article Content */}
-              <div className="prose max-w-none">
-                <p className="leading-relaxed">
-                  {isSimplified ? article.simplified : article.standard}
-                </p>
-              </div>
-            </div>
-          </div>
-          
-          {/* Right Sidebar */}
-          <div className="space-y-6">
-            {/* Notes Panel */}
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-xl font-semibold mb-4">Notes</h2>
-              <Textarea 
-                value={notes}
-                onChange={(e) => setNotes(e.target.value)}
-                placeholder="Add your notes here..."
-                className="min-h-[150px] mb-4"
-              />
-              <Button onClick={saveNotes} className="w-full bg-orange-500 hover:bg-orange-600">
-                Save locally
+      <div className="sticky top-0 z-40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            <Link to="/articles">
+              <Button variant="outline" size="sm">
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                Back to Articles
+              </Button>
+            </Link>
+            <div className="flex items-center space-x-2">
+              <Button variant="outline" size="sm" onClick={handlePrevious} disabled={!allArticles.length || allArticles[0].number === article.number}>
+                ← Previous
+              </Button>
+              <span className="text-sm text-muted-foreground">
+                {allArticles.findIndex(a => a.number === article.number) + 1} / {allArticles.length}
+              </span>
+              <Button variant="outline" size="sm" onClick={handleNext} disabled={!allArticles.length || allArticles[allArticles.length - 1].number === article.number}>
+                Next →
               </Button>
             </div>
-            
-            {/* Related Articles Panel */}
-            <div className="bg-white rounded-lg shadow-md p-6">
-              <h2 className="text-xl font-semibold mb-4">Related articles</h2>
-              <ul className="space-y-3">
-                {article.relatedArticles.map((related) => (
-                  <li key={related.id}>
-                    <Link 
-                      to={`/articles/${related.id}`}
-                      className="flex items-center text-primary hover:underline"
-                    >
-                      <BookOpen className="w-4 h-4 mr-2" />
-                      <span>Article {related.id} {related.title}</span>
-                    </Link>
-                  </li>
-                ))}
-              </ul>
+          </div>
+          <div className="mt-2">
+            <div className="w-full bg-secondary rounded-full h-2">
+              <div className="bg-primary h-2 rounded-full transition-all duration-300" style={{ width: `${getProgress()}%` }} />
             </div>
           </div>
         </div>
+      </div>
+
+      <main className="container mx-auto px-4 py-8 max-w-4xl">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <div className="mb-8">
+            <Badge variant="outline" className="font-mono mb-4">Article {article.number}</Badge>
+            <h1 className="text-4xl font-bold text-foreground mb-4">
+              {article.title}
+            </h1>
+            
+            <div className="flex flex-wrap gap-2 mb-6">
+              <Button variant="outline" size="sm" onClick={() => setSimplifiedLanguage(!simplifiedLanguage)}>
+                <Eye className="w-4 h-4 mr-2" />
+                {simplifiedLanguage ? 'Original' : 'Simplified'}
+              </Button>
+              <Button variant="outline" size="sm" onClick={handleBookmark}>
+                <Bookmark className={`w-4 h-4 mr-2 ${bookmarked ? 'fill-current' : ''}`} />
+                {bookmarked ? 'Bookmarked' : 'Bookmark'}
+              </Button>
+              <Button variant="outline" size="sm" onClick={handleShare}>
+                <Share2 className="w-4 h-4 mr-2" />
+                Share
+              </Button>
+              <Button variant="outline" size="sm" onClick={handleDownload}>
+                <Download className="w-4 h-4 mr-2" />
+                Download
+              </Button>
+            </div>
+          </div>
+
+          <Card className="constitutional-card mb-8">
+            <CardHeader>
+              <CardTitle>Article Content</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="prose prose-lg max-w-none">
+                <p className="text-foreground leading-relaxed text-justify">
+                  {simplifiedLanguage ? 
+                    article.text.replace(/shall/g, 'will').replace(/may/g, 'can').replace(/hereto/g, 'here to') : 
+                    article.text
+                  }
+                </p>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card className="constitutional-card">
+            <CardHeader>
+              <CardTitle>Your Notes</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <textarea
+                value={notes}
+                onChange={(e) => handleNotesChange(e.target.value)}
+                placeholder="Add your notes about this article..."
+                className="w-full min-h-[120px] p-3 border rounded-md bg-background text-foreground resize-none focus:outline-none focus:ring-2 focus:ring-primary"
+              />
+            </CardContent>
+          </Card>
+        </motion.div>
       </main>
-      
+
       <Footer />
     </div>
   );
