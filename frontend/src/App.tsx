@@ -21,6 +21,7 @@ import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 import QuickLinks from "./pages/QuickLinks";
 import NotFound from "./pages/NotFound";
+import ConstitutionalChatbot from "./components/ConstitutionalChatbot";
 
 const queryClient = new QueryClient();
 
@@ -50,6 +51,7 @@ const App = () => (
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
+          <ConstitutionalChatbot />
         </TooltipProvider>
       </GameProvider>
     </AuthProvider>
