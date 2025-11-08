@@ -80,7 +80,7 @@ export const scenarios: Scenario[] = [
             name: "Village People",
             gender: "female",
             age: "adult",
-            role: "Community Members",
+            role: "Citizen",
             emotion: "worried"
           }
         },
@@ -154,7 +154,7 @@ export const scenarios: Scenario[] = [
             name: "School Administrator",
             gender: "male",
             age: "adult",
-            role: "School Official",
+            role: "Official",
             emotion: "neutral"
           }
         },
@@ -226,7 +226,7 @@ export const scenarios: Scenario[] = [
             name: "Government Official",
             gender: "male",
             age: "adult",
-            role: "Government Official",
+            role: "Official",
             emotion: "neutral"
           }
         },
@@ -250,7 +250,7 @@ export const scenarios: Scenario[] = [
             name: "Government Official",
             gender: "male",
             age: "adult",
-            role: "Government Official",
+            role: "Official",
             emotion: "neutral"
           }
         },
@@ -322,7 +322,7 @@ export const scenarios: Scenario[] = [
             name: "Recruitment Official",
             gender: "female",
             age: "adult",
-            role: "Government Official",
+            role: "Official",
             emotion: "neutral"
           }
         },
