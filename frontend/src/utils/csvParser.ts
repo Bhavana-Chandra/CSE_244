@@ -9,6 +9,7 @@ export interface ConstitutionPart {
 
 export interface ConstitutionArticle {
   number: number;
+  suffix?: string;
   title: string;
   content: string;
   part: string;
@@ -17,22 +18,47 @@ export interface ConstitutionArticle {
 export const parseIndexCSV = (csvText: string): ConstitutionPart[] => {
   const lines = csvText.split('\n').filter(line => line.trim());
   const parts: ConstitutionPart[] = [];
+
+  const splitCSVLine = (line: string): string[] => {
+    const result: string[] = [];
+    let current = '';
+    let inQuotes = false;
+    for (let i = 0; i < line.length; i++) {
+      const ch = line[i];
+      if (ch === '"') {
+        if (inQuotes && i + 1 < line.length && line[i + 1] === '"') {
+          current += '"';
+          i++;
+        } else {
+          inQuotes = !inQuotes;
+        }
+      } else if (ch === ',' && !inQuotes) {
+        result.push(current);
+        current = '';
+      } else {
+        current += ch;
+      }
+    }
+    result.push(current);
+    return result.map(cell => cell.trim().replace(/^"|"$/g, ''));
+  };
   
   // Skip header row
   for (let i = 1; i < lines.length; i++) {
     const line = lines[i];
-    const [partName, subject, articleRange] = line.split(',').map(cell => 
-      cell.replace(/^"|"$/g, '').trim()
-    );
+    const fields = splitCSVLine(line);
+    const partName = fields[0];
+    const subject = fields[1];
+    const articleRange = fields[2];
     
     if (!partName || !articleRange || articleRange === '�') continue;
     
-    // Parse article range (e.g., "Article 1-4" or "Article 52-151")
-    const rangeMatch = articleRange.match(/Article\s+(\d+)-(\d+)/);
-    if (rangeMatch) {
-      const startArticle = parseInt(rangeMatch[1]);
-      const endArticle = parseInt(rangeMatch[2]);
-      
+    const code = articleRange.replace(/^Article\s+/i, '');
+    const [startCode, endCode] = code.split('-');
+    const startArticle = parseInt(startCode);
+    const endArticle = parseInt(endCode || startCode);
+    
+    if (!isNaN(startArticle)) {
       parts.push({
         id: partName.toLowerCase().replace(/\s+/g, '-'),
         name: partName,
@@ -48,40 +74,41 @@ export const parseIndexCSV = (csvText: string): ConstitutionPart[] => {
 };
 
 export const parseConstitutionCSV = (csvText: string): ConstitutionArticle[] => {
-  const lines = csvText.split('\n').filter(line => line.trim());
-  const articles: ConstitutionArticle[] = [];
-  
-  // Skip header row
-  for (let i = 1; i < lines.length; i++) {
-    const line = lines[i];
-    
-    // Parse article number and title
-    const articleMatch = line.match(/^(\d+)([A-Z]?)\.\s*(.+?)(?:\n|$)/);
-    if (articleMatch) {
-      const articleNumber = parseInt(articleMatch[1]);
-      const articleSuffix = articleMatch[2] || '';
-      const articleTitle = articleMatch[3].trim();
-      
-      // Get the full content (rest of the line)
-      let content = line.substring(line.indexOf(articleMatch[3]) + articleMatch[3].length).trim();
-      
-      // If content is empty or just a number, get the next line as content
-      if (!content || /^\d+$/.test(content)) {
-        if (i + 1 < lines.length) {
-          content = lines[i + 1].trim();
-          i++; // Skip the next line since we used it
-        }
-      }
-      
-      articles.push({
-        number: articleNumber,
-        title: articleTitle,
-        content: content,
-        part: '' // Will be determined based on article number
-      });
-    }
+  const normalized = csvText.replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+  const firstLineEnd = normalized.indexOf('\n');
+  const firstLine = firstLineEnd >= 0 ? normalized.slice(0, firstLineEnd) : normalized;
+  const body = /^\d/.test(firstLine) ? normalized : normalized.slice(firstLineEnd + 1);
+
+  const re = /(^|\n)(\d+)([A-Z]{0,2})\.\s*([^\n]+)/g;
+  const headers: { index: number; number: number; suffix?: string; title: string }[] = [];
+  let m: RegExpExecArray | null;
+  while ((m = re.exec(body)) !== null) {
+    const headingStart = m.index + (m[1] ? m[1].length : 0);
+    headers.push({
+      index: headingStart,
+      number: parseInt(m[2]),
+      suffix: m[3] || undefined,
+      title: m[4].trim()
+    });
   }
-  
+
+  const articles: ConstitutionArticle[] = [];
+  for (let i = 0; i < headers.length; i++) {
+    const h = headers[i];
+    const nextIndex = i + 1 < headers.length ? headers[i + 1].index : body.length;
+    const headingText = `${h.number}${h.suffix || ''}. ` + h.title;
+    const headingEnd = h.index + headingText.length;
+    const content = body.slice(headingEnd, nextIndex).trim();
+
+    articles.push({
+      number: h.number,
+      suffix: h.suffix,
+      title: h.title,
+      content,
+      part: ''
+    });
+  }
+
   return articles;
 };
 

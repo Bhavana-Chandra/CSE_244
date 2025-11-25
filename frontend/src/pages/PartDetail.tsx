@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, BookOpen, FileText, Lightbulb, Star, PenTool, Download, Share2, Scale, Book, GraduationCap } from "lucide-react";
+import { ArrowLeft, BookOpen, FileText, Lightbulb, Star, PenTool, Download, Share2, Scale, Book, GraduationCap, Bookmark } from "lucide-react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Link, useParams, useNavigate } from "react-router-dom";
@@ -158,7 +158,7 @@ const studyMaterials: { [key: string]: any } = {
       "K. Krishna Murthy v. Union of India (2010)",
       "State of West Bengal v. Committee for Protection of Democratic Rights (2010)"
     ],
-    articleRange: "Articles 243-243O"
+    articleRange: "Articles 243-243ZT"
   },
   "part-ixa": {
     overview: "Part IXA was added by the 74th Amendment Act, 1992, and establishes the Municipal system for urban local self-government. It provides for various types of urban local bodies.",
@@ -247,14 +247,13 @@ export default function PartDetail() {
         }
         setPart(foundPart);
         
-        // Parse article range from part.articleRange (e.g., "Article 1-4")
         const articleRange = foundPart.articleRange.replace("Article ", "").split("-");
         const startArticle = parseInt(articleRange[0]);
         const endArticle = parseInt(articleRange[1]) || startArticle;
         
         // Filter articles within the range
         const partArticles = constitutionData.articles.filter(article => {
-          const articleNumber = parseInt(article.articleNumber);
+          const articleNumber = article.number;
           return articleNumber >= startArticle && articleNumber <= endArticle;
         });
         
@@ -287,9 +286,20 @@ export default function PartDetail() {
     localStorage.setItem(`bookmarked-articles-${id}`, JSON.stringify([...newBookmarks]));
   };
 
+  const formatContent = (text: string) => {
+    let t = text;
+    t = t.replace(/;\s+/g, ';\n');
+    t = t.replace(/\s\((\d+)\)/g, '\n($1)');
+    t = t.replace(/\s\(([a-zA-Z])\)/g, '\n($1)');
+    t = t.replace(/\s(Proviso:)/g, '\n$1');
+    t = t.replace(/\s(Explanation\s+I:)/g, '\n$1');
+    t = t.replace(/\s(Explanation\s+II:)/g, '\n$1');
+    return t;
+  };
+
   const handleDownloadStudyMaterial = () => {
     const content = `
-STUDY MATERIAL FOR ${part?.title}
+STUDY MATERIAL FOR ${part?.id}
 
 OVERVIEW:
 ${currentStudyMaterial.overview}
@@ -316,7 +326,7 @@ Generated from Constitution Study App
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `${part?.title.replace(/\s+/g, '_')}_Study_Material.txt`;
+    a.download = `${part?.id.replace(/\s+/g, '_')}_Study_Material.txt`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -427,12 +437,12 @@ Generated from Constitution Study App
               <h2 className="text-2xl font-bold text-gray-900 mb-6">Constitutional Articles</h2>
               <div className="grid gap-6">
                 {articles.map((article) => (
-                  <Card key={article.articleNumber} className="hover:shadow-md transition-shadow duration-200 border-gray-200">
+                  <Card key={article.number} className="hover:shadow-md transition-shadow duration-200 border-gray-200">
                     <CardHeader className="pb-4">
                       <div className="flex items-center justify-between">
                         <div>
                           <CardTitle className="text-xl text-gray-900">
-                            Article {article.articleNumber}
+                            Article {`${article.number}${article.suffix || ''}`}
                           </CardTitle>
                           {article.title && (
                             <p className="text-gray-600 mt-1">{article.title}</p>
@@ -441,8 +451,8 @@ Generated from Constitution Study App
                         <Button
                           variant="ghost"
                           size="sm"
-                          onClick={() => handleBookmark(parseInt(article.articleNumber))}
-                          className={bookmarkedArticles.has(parseInt(article.articleNumber)) ? "text-yellow-500" : "text-gray-400"}
+                          onClick={() => handleBookmark(article.number)}
+                          className={bookmarkedArticles.has(article.number) ? "text-yellow-500" : "text-gray-400"}
                         >
                           <Bookmark className="w-4 h-4" />
                         </Button>
@@ -450,7 +460,7 @@ Generated from Constitution Study App
                     </CardHeader>
                     <CardContent>
                       <div className="prose prose-gray max-w-none">
-                        <p className="text-gray-700 leading-relaxed">{article.text}</p>
+                        <div className="text-gray-700 leading-relaxed whitespace-pre-line">{formatContent(article.content)}</div>
                       </div>
                     </CardContent>
                   </Card>
@@ -478,7 +488,7 @@ Generated from Constitution Study App
                 <div className="bg-purple-50 rounded-lg p-6 border border-purple-200">
                   <h3 className="text-lg font-semibold text-purple-900 mb-3">Articles Covered</h3>
                   <Badge variant="outline" className="text-purple-700 border-purple-300 bg-purple-50">
-                    {currentStudyMaterial.articles}
+                    {currentStudyMaterial.articleRange}
                   </Badge>
                 </div>
               </div>

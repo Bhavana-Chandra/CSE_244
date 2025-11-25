@@ -21,8 +21,8 @@ const categories = [
 const categoryMapping: { [key: string]: string[] } = {
   rights: ["Part III"],
   duties: ["Part IV A"],
-  government: ["Part V", "Part VI", "Part VIII", "Part IX", "Part IX A", "Part IX B", "Part X", "Part XI", "Part XII"],
-  judiciary: ["Part V", "Part VI"], // Simplified, as it overlaps with government
+  government: ["Part V", "Part VI", "Part VIII", "Part IX", "Part IX A", "Part IX B", "Part X", "Part XI", "Part XII", "Part XIII"],
+  judiciary: ["Part V", "Part VI"],
   amendments: ["Part XX"],
 };
 
