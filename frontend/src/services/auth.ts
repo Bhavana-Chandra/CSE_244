@@ -20,6 +20,9 @@ export interface RegisterCredentials {
 
 class AuthService {
   async signUp({ email, password, full_name }: RegisterCredentials) {
+    // Get the current origin (works in both dev and production)
+    const redirectTo = `${window.location.origin}/auth/callback`
+    
     const { data, error } = await supabase.auth.signUp({
       email,
       password,
@@ -27,6 +30,7 @@ class AuthService {
         data: {
           full_name,
         },
+        emailRedirectTo: redirectTo,
       },
     })
 
@@ -62,7 +66,12 @@ class AuthService {
   }
 
   async resetPassword(email: string) {
-    const { error } = await supabase.auth.resetPasswordForEmail(email)
+    // Get the current origin (works in both dev and production)
+    const redirectTo = `${window.location.origin}/auth/reset-password`
+    
+    const { error } = await supabase.auth.resetPasswordForEmail(email, {
+      redirectTo,
+    })
     if (error) throw error
   }
 

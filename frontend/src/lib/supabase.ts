@@ -5,7 +5,13 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY
 
 // Create a mock client if environment variables are missing
 export const supabase = supabaseUrl && supabaseAnonKey 
-  ? createClient(supabaseUrl, supabaseAnonKey)
+  ? createClient(supabaseUrl, supabaseAnonKey, {
+      auth: {
+        autoRefreshToken: true,
+        persistSession: true,
+        detectSessionInUrl: true, // This enables automatic session detection from URL hash
+      },
+    })
   : {
       auth: {
         getUser: () => Promise.resolve({ data: { user: null }, error: null }),

@@ -24,6 +24,7 @@ import Register from "./pages/Register";
 import Profile from "./pages/Profile";
 import QuickLinks from "./pages/QuickLinks";
 import NotFound from "./pages/NotFound";
+import AuthCallback from "./pages/AuthCallback";
 import ConstitutionalChatbot from "./components/ConstitutionalChatbot";
 
 const queryClient = new QueryClient();
@@ -54,6 +55,8 @@ const App = () => (
               <Route path="/login" element={<Login />} />
               <Route path="/register" element={<Register />} />
               <Route path="/profile" element={<Profile />} />
+              <Route path="/auth/callback" element={<AuthCallback />} />
+              <Route path="/auth/reset-password" element={<AuthCallback />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
