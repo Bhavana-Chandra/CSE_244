@@ -180,23 +180,26 @@ const ArticleDetail = () => {
       <Header />
       
       <div className="sticky top-0 z-40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex items-center justify-between">
-            <Link to="/articles">
-              <Button variant="outline" size="sm">
+        <div className="container mx-auto px-3 sm:px-4 py-3 sm:py-4">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+            <Link to="/articles" className="w-full sm:w-auto">
+              <Button variant="outline" size="sm" className="w-full sm:w-auto">
                 <ArrowLeft className="w-4 h-4 mr-2" />
-                Back to Articles
+                <span className="hidden sm:inline">Back to Articles</span>
+                <span className="sm:hidden">Back</span>
               </Button>
             </Link>
-            <div className="flex items-center space-x-2">
-              <Button variant="outline" size="sm" onClick={handlePrevious} disabled={!allArticles.length || allArticles[0].number === article.number}>
-                ← Previous
+            <div className="flex items-center justify-between sm:justify-end w-full sm:w-auto gap-2">
+              <Button variant="outline" size="sm" onClick={handlePrevious} disabled={!allArticles.length || allArticles[0].number === article.number} className="flex-1 sm:flex-initial">
+                <span className="hidden sm:inline">← Previous</span>
+                <span className="sm:hidden">←</span>
               </Button>
-              <span className="text-sm text-muted-foreground">
+              <span className="text-xs sm:text-sm text-muted-foreground px-2 whitespace-nowrap">
                 {allArticles.findIndex(a => a.number === article.number) + 1} / {allArticles.length}
               </span>
-              <Button variant="outline" size="sm" onClick={handleNext} disabled={!allArticles.length || allArticles[allArticles.length - 1].number === article.number}>
-                Next →
+              <Button variant="outline" size="sm" onClick={handleNext} disabled={!allArticles.length || allArticles[allArticles.length - 1].number === article.number} className="flex-1 sm:flex-initial">
+                <span className="hidden sm:inline">Next →</span>
+                <span className="sm:hidden">→</span>
               </Button>
             </div>
           </div>
@@ -208,45 +211,48 @@ const ArticleDetail = () => {
         </div>
       </div>
 
-      <main className="container mx-auto px-4 py-8 max-w-4xl">
+      <main className="container mx-auto px-3 sm:px-4 py-6 sm:py-8 max-w-4xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <div className="mb-8">
-            <Badge variant="outline" className="font-mono mb-4">Article {article.number}</Badge>
-            <h1 className="text-4xl font-bold text-foreground mb-4">
+          <div className="mb-6 sm:mb-8">
+            <Badge variant="outline" className="font-mono mb-3 sm:mb-4 text-xs sm:text-sm">Article {article.number}</Badge>
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-4 leading-tight break-words">
               {article.title}
             </h1>
             
-            <div className="flex flex-wrap gap-2 mb-6">
-              <Button variant="outline" size="sm" onClick={() => setSimplifiedLanguage(!simplifiedLanguage)}>
-                <Eye className="w-4 h-4 mr-2" />
-                {simplifiedLanguage ? 'Original' : 'Simplified'}
+            <div className="flex flex-wrap gap-2 mb-4 sm:mb-6">
+              <Button variant="outline" size="sm" onClick={() => setSimplifiedLanguage(!simplifiedLanguage)} className="text-xs sm:text-sm">
+                <Eye className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                <span className="hidden sm:inline">{simplifiedLanguage ? 'Original' : 'Simplified'}</span>
+                <span className="sm:hidden">{simplifiedLanguage ? 'Original' : 'Simple'}</span>
               </Button>
-              <Button variant="outline" size="sm" onClick={handleBookmark}>
-                <Bookmark className={`w-4 h-4 mr-2 ${bookmarked ? 'fill-current' : ''}`} />
-                {bookmarked ? 'Bookmarked' : 'Bookmark'}
+              <Button variant="outline" size="sm" onClick={handleBookmark} className="text-xs sm:text-sm">
+                <Bookmark className={`w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2 ${bookmarked ? 'fill-current' : ''}`} />
+                <span className="hidden sm:inline">{bookmarked ? 'Bookmarked' : 'Bookmark'}</span>
+                <span className="sm:hidden">{bookmarked ? 'Saved' : 'Save'}</span>
               </Button>
-              <Button variant="outline" size="sm" onClick={handleShare}>
-                <Share2 className="w-4 h-4 mr-2" />
+              <Button variant="outline" size="sm" onClick={handleShare} className="text-xs sm:text-sm">
+                <Share2 className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
                 Share
               </Button>
-              <Button variant="outline" size="sm" onClick={handleDownload}>
-                <Download className="w-4 h-4 mr-2" />
-                Download
+              <Button variant="outline" size="sm" onClick={handleDownload} className="text-xs sm:text-sm">
+                <Download className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                <span className="hidden sm:inline">Download</span>
+                <span className="sm:hidden">DL</span>
               </Button>
             </div>
           </div>
 
-          <Card className="constitutional-card mb-8">
-            <CardHeader>
-              <CardTitle>Article Content</CardTitle>
+          <Card className="constitutional-card mb-6 sm:mb-8">
+            <CardHeader className="pb-3 sm:pb-6">
+              <CardTitle className="text-lg sm:text-xl">Article Content</CardTitle>
             </CardHeader>
             <CardContent>
-              <div className="prose prose-lg max-w-none">
-                <p className="text-foreground leading-relaxed text-justify">
+              <div className="prose prose-sm sm:prose-base md:prose-lg max-w-none">
+                <p className="text-foreground leading-relaxed text-justify break-words text-sm sm:text-base">
                   {simplifiedLanguage ? 
                     article.text.replace(/shall/g, 'will').replace(/may/g, 'can').replace(/hereto/g, 'here to') : 
                     article.text
@@ -257,15 +263,15 @@ const ArticleDetail = () => {
           </Card>
 
           <Card className="constitutional-card">
-            <CardHeader>
-              <CardTitle>Your Notes</CardTitle>
+            <CardHeader className="pb-3 sm:pb-6">
+              <CardTitle className="text-lg sm:text-xl">Your Notes</CardTitle>
             </CardHeader>
             <CardContent>
               <textarea
                 value={notes}
                 onChange={(e) => handleNotesChange(e.target.value)}
                 placeholder="Add your notes about this article..."
-                className="w-full min-h-[120px] p-3 border rounded-md bg-background text-foreground resize-none focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full min-h-[120px] p-3 border rounded-md bg-background text-foreground resize-none focus:outline-none focus:ring-2 focus:ring-primary text-sm sm:text-base"
               />
             </CardContent>
           </Card>

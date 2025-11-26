@@ -65,19 +65,75 @@ const Header: React.FC = () => {
 
   // Inject Google Translate script and initialize widget inside Header
   useEffect(() => {
-    // Define global init callback
-    (window as any).googleTranslateElementInit = () => {
+    // Helper function to check if Google Translate API is ready
+    const isGoogleTranslateReady = (): boolean => {
       try {
         const googleObj = (window as any).google;
-        if (googleObj && googleObj.translate) {
-          new googleObj.translate.TranslateElement(
-            { pageLanguage: "en" },
-            "google_translate_element"
-          );
-        }
-      } catch (e) {
-        // fail silently to avoid breaking header
+        return !!(
+          googleObj &&
+          googleObj.translate &&
+          googleObj.translate.TranslateElement &&
+          typeof googleObj.translate.TranslateElement === 'function'
+        );
+      } catch {
+        return false;
       }
+    };
+
+    // Helper function to initialize translate element
+    const initTranslateElement = (elementId: string): boolean => {
+      try {
+        if (!isGoogleTranslateReady()) {
+          return false;
+        }
+
+        const element = document.getElementById(elementId);
+        if (!element) {
+          return false;
+        }
+
+        // Check if already initialized
+        if (element.hasChildNodes()) {
+          return true;
+        }
+
+        // Clear any existing content first
+        element.innerHTML = '';
+        
+        const googleObj = (window as any).google;
+        new googleObj.translate.TranslateElement(
+          { 
+            pageLanguage: "en",
+            layout: googleObj.translate.TranslateElement.InlineLayout.SIMPLE
+          },
+          elementId
+        );
+        return true;
+      } catch (e) {
+        console.error(`Error initializing translate element ${elementId}:`, e);
+        return false;
+      }
+    };
+
+    // Define global init callback
+    (window as any).googleTranslateElementInit = () => {
+      // Wait a bit to ensure everything is ready
+      setTimeout(() => {
+        if (isGoogleTranslateReady()) {
+          // Initialize for desktop
+          initTranslateElement("google_translate_element");
+          
+          // Initialize for mobile header
+          initTranslateElement("google_translate_element_mobile_header");
+          
+          // Try to initialize mobile menu if it's open
+          if (isOpen) {
+            setTimeout(() => {
+              initTranslateElement("google_translate_element_mobile");
+            }, 200);
+          }
+        }
+      }, 100);
     };
 
     // Inject script only once
@@ -86,22 +142,167 @@ const Header: React.FC = () => {
       const script = document.createElement("script");
       script.id = "google-translate-script";
       script.type = "text/javascript";
-      script.src = "//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+      script.src = "https://translate.google.com/translate_a/element.js?cb=googleTranslateElementInit";
+      script.async = true;
       document.body.appendChild(script);
     } else {
       // If script is already present, try to initialize immediately
-      if ((window as any).google && (window as any).google.translate) {
+      if (isGoogleTranslateReady()) {
         (window as any).googleTranslateElementInit();
+      } else {
+        // Wait for script to load
+        const checkInterval = setInterval(() => {
+          if (isGoogleTranslateReady()) {
+            clearInterval(checkInterval);
+            (window as any).googleTranslateElementInit();
+          }
+        }, 100);
+        
+        // Clear interval after 10 seconds
+        setTimeout(() => clearInterval(checkInterval), 10000);
       }
     }
   }, []);
 
+  // Separate effect to handle mobile menu opening
+  useEffect(() => {
+    if (!isOpen) return;
+
+    // Helper function to check if Google Translate API is ready
+    const isGoogleTranslateReady = (): boolean => {
+      try {
+        const googleObj = (window as any).google;
+        return !!(
+          googleObj &&
+          googleObj.translate &&
+          googleObj.translate.TranslateElement &&
+          typeof googleObj.translate.TranslateElement === 'function'
+        );
+      } catch {
+        return false;
+      }
+    };
+
+    // Function to try initializing the mobile translate element
+    const initMobileTranslate = (): boolean => {
+      if (!isGoogleTranslateReady()) {
+        return false;
+      }
+
+      const mobileElement = document.getElementById("google_translate_element_mobile");
+      if (!mobileElement) {
+        return false;
+      }
+
+      // Check if already initialized
+      if (mobileElement.hasChildNodes()) {
+        return true;
+      }
+
+      try {
+        // Clear element first
+        mobileElement.innerHTML = '';
+        
+        const googleObj = (window as any).google;
+        new googleObj.translate.TranslateElement(
+          { 
+            pageLanguage: "en",
+            layout: googleObj.translate.TranslateElement.InlineLayout.SIMPLE
+          },
+          "google_translate_element_mobile"
+        );
+        return true;
+      } catch (e) {
+        console.error("Error initializing mobile translate:", e);
+        return false;
+      }
+    };
+
+    // Try multiple times with increasing delays to account for Sheet animation
+    const attempts = [200, 400, 600, 1000, 1500];
+    const timers: NodeJS.Timeout[] = [];
+
+    attempts.forEach((delay) => {
+      const timer = setTimeout(() => {
+        if (initMobileTranslate()) {
+          // Success, clear remaining timers
+          timers.forEach(t => {
+            if (t !== timer) clearTimeout(t);
+          });
+        }
+      }, delay);
+      timers.push(timer);
+    });
+
+    return () => {
+      timers.forEach(timer => clearTimeout(timer));
+    };
+  }, [isOpen]);
+
   return (
-    <header className={`sticky top-0 z-50 transition-all duration-300 ${
-      isScrolled 
-        ? "bg-white/95 backdrop-blur-md shadow-lg border-b border-orange-200" 
-        : "bg-white/80 backdrop-blur-sm"
-    }`}>
+    <>
+      {/* Styles for Google Translate widget */}
+      <style>{`
+        /* Google Translate widget styling */
+        #google_translate_element,
+        #google_translate_element_mobile {
+          display: inline-block;
+        }
+        
+        /* Hide Google branding on mobile for cleaner look */
+        #google_translate_element_mobile .goog-te-banner-frame,
+        #google_translate_element .goog-te-banner-frame {
+          display: none !important;
+        }
+        
+        /* Style the select dropdown */
+        #google_translate_element_mobile .goog-te-gadget,
+        #google_translate_element .goog-te-gadget {
+          font-family: inherit;
+          font-size: 14px;
+        }
+        
+        #google_translate_element_mobile .goog-te-gadget-simple,
+        #google_translate_element .goog-te-gadget-simple {
+          background-color: transparent;
+          border: 1px solid #e5e7eb;
+          border-radius: 0.5rem;
+          padding: 0.5rem;
+          font-size: 14px;
+          color: #374151;
+        }
+        
+        #google_translate_element_mobile .goog-te-gadget-simple .goog-te-menu-value span,
+        #google_translate_element .goog-te-gadget-simple .goog-te-menu-value span {
+          color: #374151;
+        }
+        
+        /* Mobile specific styling */
+        @media (max-width: 768px) {
+          #google_translate_element_mobile,
+          #google_translate_element_mobile_header {
+            width: 100%;
+          }
+          
+          #google_translate_element_mobile .goog-te-gadget-simple,
+          #google_translate_element_mobile_header .goog-te-gadget-simple {
+            width: 100%;
+            max-width: 100%;
+            font-size: 12px;
+            padding: 0.375rem;
+          }
+          
+          #google_translate_element_mobile_header {
+            max-width: 120px;
+          }
+        }
+      `}</style>
+      
+      <header className={`sticky top-0 z-50 transition-all duration-300 ${
+        isScrolled 
+          ? "bg-white/95 backdrop-blur-md shadow-lg border-b border-orange-200" 
+          : "bg-white/80 backdrop-blur-sm"
+      }`}>
       <nav className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           {/* Logo */}
@@ -206,8 +407,46 @@ const Header: React.FC = () => {
               </div>
             )}
 
-            {/* Mobile Menu Button */}
-            <div className="md:hidden">
+            {/* Mobile Menu Button and Translate */}
+            <div className="md:hidden flex items-center space-x-2">
+              {/* Google Translate for Mobile Header */}
+              <div 
+                id="google_translate_element_mobile_header" 
+                className="flex items-center"
+                ref={(el) => {
+                  // Initialize when element is mounted and script is loaded
+                  if (el) {
+                    const tryInit = () => {
+                      try {
+                        const googleObj = (window as any).google;
+                        if (
+                          googleObj &&
+                          googleObj.translate &&
+                          googleObj.translate.TranslateElement &&
+                          typeof googleObj.translate.TranslateElement === 'function' &&
+                          !el.hasChildNodes()
+                        ) {
+                          el.innerHTML = '';
+                          new googleObj.translate.TranslateElement(
+                            { 
+                              pageLanguage: "en",
+                              layout: googleObj.translate.TranslateElement.InlineLayout.SIMPLE
+                            },
+                            "google_translate_element_mobile_header"
+                          );
+                        } else if (!googleObj?.translate?.TranslateElement) {
+                          // Script not loaded yet, try again
+                          setTimeout(tryInit, 200);
+                        }
+                      } catch (e) {
+                        console.error("Ref callback mobile header translate init error:", e);
+                      }
+                    };
+                    setTimeout(tryInit, 100);
+                  }
+                }}
+              />
+              
               <Sheet open={isOpen} onOpenChange={setIsOpen}>
                 <SheetTrigger asChild>
                   <Button variant="ghost" size="sm">
@@ -238,6 +477,54 @@ const Header: React.FC = () => {
                           <span>{item.name}</span>
                         </Link>
                       ))}
+                      
+                      {/* Google Translate for Mobile */}
+                      <div className="border-t pt-4 mt-4">
+                        <div className="flex items-center space-x-3 p-3 rounded-lg">
+                          <Globe className="h-5 w-5 text-gray-600" />
+                          <span className="text-sm font-medium text-gray-700">Select Language</span>
+                        </div>
+                        <div className="px-3 pb-2">
+                          <div 
+                            id="google_translate_element_mobile" 
+                            className="w-full"
+                            ref={(el) => {
+                              // Initialize when element is mounted and menu is open
+                              if (el && isOpen) {
+                                const tryInit = () => {
+                                  try {
+                                    const googleObj = (window as any).google;
+                                    if (
+                                      googleObj &&
+                                      googleObj.translate &&
+                                      googleObj.translate.TranslateElement &&
+                                      typeof googleObj.translate.TranslateElement === 'function' &&
+                                      !el.hasChildNodes()
+                                    ) {
+                                      el.innerHTML = '';
+                                      new googleObj.translate.TranslateElement(
+                                        { 
+                                          pageLanguage: "en",
+                                          layout: googleObj.translate.TranslateElement.InlineLayout.SIMPLE
+                                        },
+                                        "google_translate_element_mobile"
+                                      );
+                                    } else if (!googleObj?.translate?.TranslateElement) {
+                                      // Script not loaded yet, try again
+                                      setTimeout(tryInit, 200);
+                                    }
+                                  } catch (e) {
+                                    console.error("Ref callback translate init error:", e);
+                                  }
+                                };
+                                // Wait for Sheet animation to complete
+                                setTimeout(tryInit, 400);
+                              }
+                            }}
+                          />
+                        </div>
+                        <p className="text-xs text-muted-foreground px-3 pb-2">Powered by Google Translate</p>
+                      </div>
                     </nav>
                     
                     {user && (
@@ -256,6 +543,7 @@ const Header: React.FC = () => {
         
       </nav>
     </header>
+    </>
   );
 };
 

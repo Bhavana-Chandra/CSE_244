@@ -374,27 +374,29 @@ Generated from Constitution Study App
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
       {/* Sticky Header */}
       <div className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
-          <div className="flex items-center justify-between">
-            <Button onClick={() => navigate('/parts')} variant="outline" size="sm">
+        <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-3 sm:py-4">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-2 sm:gap-4">
+            <Button onClick={() => navigate('/parts')} variant="outline" size="sm" className="w-full sm:w-auto">
               <ArrowLeft className="w-4 h-4 mr-2" />
-              Back to Parts
+              <span className="hidden sm:inline">Back to Parts</span>
+              <span className="sm:hidden">Back</span>
             </Button>
-            <Button onClick={handleDownloadStudyMaterial} variant="outline" size="sm">
+            <Button onClick={handleDownloadStudyMaterial} variant="outline" size="sm" className="w-full sm:w-auto text-xs sm:text-sm">
               <Download className="w-4 h-4 mr-2" />
-              Download Study Material
+              <span className="hidden sm:inline">Download Study Material</span>
+              <span className="sm:hidden">Download</span>
             </Button>
           </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <div className="max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 py-4 sm:py-8">
         {/* Part Header */}
-        <div className="bg-white rounded-xl shadow-lg p-8 mb-8 border border-gray-200">
-          <div className="text-center mb-6">
-            <h1 className="text-4xl font-bold text-gray-900 mb-2">{part.title}</h1>
-            <p className="text-lg text-gray-600 mb-4">{part.subject}</p>
-            <Badge variant="outline" className="text-sm bg-blue-50 text-blue-700 border-blue-200">
+        <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 lg:p-8 mb-6 sm:mb-8 border border-gray-200">
+          <div className="text-center mb-4 sm:mb-6">
+            <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-gray-900 mb-2 break-words">{part.title}</h1>
+            <p className="text-sm sm:text-base lg:text-lg text-gray-600 mb-3 sm:mb-4 break-words">{part.subject}</p>
+            <Badge variant="outline" className="text-xs sm:text-sm bg-blue-50 text-blue-700 border-blue-200">
               {part.articleRange}
             </Badge>
           </div>
@@ -407,60 +409,67 @@ Generated from Constitution Study App
         </div>
 
         {/* Tabs Navigation */}
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-8">
-          <TabsList className="grid grid-cols-2 md:grid-cols-5 gap-2 bg-gray-100 p-1 rounded-lg">
-            <TabsTrigger value="articles" className="data-[state=active]:bg-white data-[state=active]:shadow-sm">
-              <Book className="w-4 h-4 mr-2" />
-              Articles
-            </TabsTrigger>
-            <TabsTrigger value="study-material" className="data-[state=active]:bg-white data-[state=active]:shadow-sm">
-              <GraduationCap className="w-4 h-4 mr-2" />
-              Study Material
-            </TabsTrigger>
-            <TabsTrigger value="key-points" className="data-[state=active]:bg-white data-[state=active]:shadow-sm">
-              <Star className="w-4 h-4 mr-2" />
-              Key Points
-            </TabsTrigger>
-            <TabsTrigger value="case-laws" className="data-[state=active]:bg-white data-[state=active]:shadow-sm">
-              <Scale className="w-4 h-4 mr-2" />
-              Case Laws
-            </TabsTrigger>
-            <TabsTrigger value="notes" className="data-[state=active]:bg-white data-[state=active]:shadow-sm">
-              <FileText className="w-4 h-4 mr-2" />
-              My Notes
-            </TabsTrigger>
-          </TabsList>
+        <Tabs value={activeTab} onValueChange={setActiveTab} className="mb-6 sm:mb-8">
+          <div className="overflow-x-auto -mx-3 sm:mx-0 px-3 sm:px-0">
+            <TabsList className="inline-flex md:grid md:grid-cols-5 gap-1 sm:gap-2 bg-gray-100 p-1 rounded-lg min-w-max md:min-w-0">
+              <TabsTrigger value="articles" className="data-[state=active]:bg-white data-[state=active]:shadow-sm text-xs sm:text-sm whitespace-nowrap">
+                <Book className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                <span className="hidden sm:inline">Articles</span>
+                <span className="sm:hidden">Articles</span>
+              </TabsTrigger>
+              <TabsTrigger value="study-material" className="data-[state=active]:bg-white data-[state=active]:shadow-sm text-xs sm:text-sm whitespace-nowrap">
+                <GraduationCap className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                <span className="hidden sm:inline">Study Material</span>
+                <span className="sm:hidden">Study</span>
+              </TabsTrigger>
+              <TabsTrigger value="key-points" className="data-[state=active]:bg-white data-[state=active]:shadow-sm text-xs sm:text-sm whitespace-nowrap">
+                <Star className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                <span className="hidden sm:inline">Key Points</span>
+                <span className="sm:hidden">Points</span>
+              </TabsTrigger>
+              <TabsTrigger value="case-laws" className="data-[state=active]:bg-white data-[state=active]:shadow-sm text-xs sm:text-sm whitespace-nowrap">
+                <Scale className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                <span className="hidden sm:inline">Case Laws</span>
+                <span className="sm:hidden">Cases</span>
+              </TabsTrigger>
+              <TabsTrigger value="notes" className="data-[state=active]:bg-white data-[state=active]:shadow-sm text-xs sm:text-sm whitespace-nowrap">
+                <FileText className="w-3 h-3 sm:w-4 sm:h-4 mr-1 sm:mr-2" />
+                <span className="hidden sm:inline">My Notes</span>
+                <span className="sm:hidden">Notes</span>
+              </TabsTrigger>
+            </TabsList>
+          </div>
 
           {/* Articles Tab */}
-          <TabsContent value="articles" className="space-y-6">
-            <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Constitutional Articles</h2>
-              <div className="grid gap-6">
+          <TabsContent value="articles" className="space-y-4 sm:space-y-6 mt-4 sm:mt-6">
+            <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 border border-gray-200">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">Constitutional Articles</h2>
+              <div className="grid gap-4 sm:gap-6">
                 {articles.map((article) => (
                   <Card key={article.number} className="hover:shadow-md transition-shadow duration-200 border-gray-200">
-                    <CardHeader className="pb-4">
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <CardTitle className="text-xl text-gray-900">
+                    <CardHeader className="pb-3 sm:pb-4 p-4 sm:p-6">
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="flex-1 min-w-0">
+                          <CardTitle className="text-lg sm:text-xl text-gray-900 break-words">
                             Article {`${article.number}${article.suffix || ''}`}
                           </CardTitle>
                           {article.title && (
-                            <p className="text-gray-600 mt-1">{article.title}</p>
+                            <p className="text-sm sm:text-base text-gray-600 mt-1 break-words">{article.title}</p>
                           )}
                         </div>
                         <Button
                           variant="ghost"
                           size="sm"
                           onClick={() => handleBookmark(article.number)}
-                          className={bookmarkedArticles.has(article.number) ? "text-yellow-500" : "text-gray-400"}
+                          className={`flex-shrink-0 ${bookmarkedArticles.has(article.number) ? "text-yellow-500" : "text-gray-400"}`}
                         >
                           <Bookmark className="w-4 h-4" />
                         </Button>
                       </div>
                     </CardHeader>
-                    <CardContent>
-                      <div className="prose prose-gray max-w-none">
-                        <div className="text-gray-700 leading-relaxed whitespace-pre-line">{formatContent(article.content)}</div>
+                    <CardContent className="p-4 sm:p-6 pt-0">
+                      <div className="prose prose-sm sm:prose-base prose-gray max-w-none">
+                        <div className="text-sm sm:text-base text-gray-700 leading-relaxed whitespace-pre-line break-words">{formatContent(article.content)}</div>
                       </div>
                     </CardContent>
                   </Card>
@@ -470,9 +479,9 @@ Generated from Constitution Study App
           </TabsContent>
 
           {/* Study Material Tab */}
-          <TabsContent value="study-material" className="space-y-6">
-            <div className="bg-white rounded-xl shadow-lg p-6 border border-gray-200">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6">Comprehensive Study Material</h2>
+          <TabsContent value="study-material" className="space-y-4 sm:space-y-6 mt-4 sm:mt-6">
+            <div className="bg-white rounded-xl shadow-lg p-4 sm:p-6 border border-gray-200">
+              <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">Comprehensive Study Material</h2>
               
               <div className="space-y-6">
                 <div className="bg-blue-50 rounded-lg p-6 border border-blue-200">

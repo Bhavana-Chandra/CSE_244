@@ -8,6 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "../co
 import { Alert, AlertDescription } from "../components/ui/alert";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { toast } from "sonner";
 
 const Register: React.FC = () => {
   const [email, setEmail] = useState("");
@@ -37,6 +38,11 @@ const Register: React.FC = () => {
 
     try {
       await register(email, password, fullName);
+      // Show success notification
+      toast.success("Account created successfully!", {
+        description: "Please check your email to verify your account.",
+        duration: 5000,
+      });
       navigate("/"); // Redirect to home page after successful registration
     } catch (error: any) {
       setError(error.message || "Registration failed");
